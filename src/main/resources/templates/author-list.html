@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nemo - 微课学习平台</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/nemo.css"/>
+    <link rel="stylesheet" href="../css/author-list.css"/>
+</head>
+<body>
+<header id="header" class="header">
+    <div class="header-fixed">
+        <div class="container">
+            <a class="logo" href="../index">Nemo</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible">
+                <div class="account-info">
+                    <img class="account-avatar" :src="user.avatar" alt="头像"/>
+                    <span class="account-name">{{user.name}}</span>
+                    <span class="icon icon-menu-down flip"></span>
+                </div>
+                <div class="account-menu" v-if="isVisible" v-cloak>
+                    <a href="../user/blog" class="account-action"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-action cog"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="" class="account-action logout"><span class="icon icon-log-out"></span>退出登录</a>
+                </div>
+            </div>
+            <span class="line"></span>
+            <a class="btn-publish" href="../book/create"><span class="icon icon-plus"></span></a>
+            <form class="form-search" action="">
+                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
+                <button class="icon icon-search btn-search" type="submit"></button>
+            </form>
+        </div>
+    </div>
+</header>
+<main id="main" class="container">
+    <div class="theme">
+        <a href="../author/list"></a>
+        <p>热点名师推荐</p>
+    </div>
+    <div class="content">
+        <div class="author" v-for="author in authorList">
+            <div class="author-info">
+                <img class="author-avatar" :src="author.avatar" alt=""/>
+                <p class="author-name">{{author.name}}</p>
+                <p class="author-follow">课程&nbsp;{{author.book}}&nbsp;&nbsp;·&nbsp;&nbsp;粉丝&nbsp;{{author.follower}}</p>
+                <p class="author-profile">{{author.profile}}</p>
+            </div>
+            <div class="book-list">
+                <h6 class="list-title">旗下课程</h6>
+                <div class="book" v-for="(book, index) in author.bookList" v-if="index < 2">
+                    <img class="book-cover" :src="book.cover" alt=""/>
+                    <div class="book-info">
+                        <p class="book-name">{{book.name}}</p>
+                        <p class="book-favor"><span class="icon icon-fire"></span>&nbsp;{{book.style}}&nbsp;&nbsp;&nbsp;漫画&nbsp;{{book.page}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="author-link" :href="'../author/blog?id=' + author.id"></a>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
+</footer>
+<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
+    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/nemo.js"></script>
+<script src="../js/author-list.js"></script>
+</body>
+</html>

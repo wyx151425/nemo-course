@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nemo - 微课学习平台</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/nemo.css"/>
+    <link rel="stylesheet" href="../css/book.css"/>
+    <link rel="stylesheet" href="../css/author.css">
+    <link rel="stylesheet" href="../css/user-blog.css"/>
+</head>
+<body>
+<header id="header" class="header">
+    <div class="header-fixed">
+        <div class="container">
+            <a class="logo" href="../index">Nemo</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible">
+                <div class="account-info">
+                    <img class="account-avatar" :src="user.avatar" alt="头像"/>
+                    <span class="account-name">{{user.name}}</span>
+                    <span class="icon icon-menu-down flip"></span>
+                </div>
+                <div class="account-menu" v-if="isVisible" v-cloak>
+                    <a href="../user/blog" class="account-action"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-action cog"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="" class="account-action logout"><span class="icon icon-log-out"></span>退出登录</a>
+                </div>
+            </div>
+            <span class="line"></span>
+            <a class="btn-publish" href="javascript:;" @click="bookCreateModalVisible"><span
+                    class="icon icon-plus"></span></a>
+            <form class="form-search" action="">
+                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
+                <button class="icon icon-search btn-search" type="submit"></button>
+            </form>
+        </div>
+    </div>
+</header>
+<main id="main" class="container">
+    <div class="theme">
+        <img class="user-portrait" :src="user.portrait" alt=""/>
+        <div class="user-info">
+            <div class="user-wrap">
+                <img class="user-avatar" :src="user.avatar" alt=""/>
+                <p class="user-name">{{user.name}}</p>
+                <p class="user-motto">{{user.motto}}</p>
+                <p class="user-profile">{{user.profile}}</p>
+            </div>
+        </div>
+        <nav class="option-nav">
+            <ul class="option-list">
+                <li><span :class="{active: tabIndex == 0}" @click="changeTab(0)">漫画&nbsp;<u>{{user.book}}</u></span>
+                </li>
+                <li><span :class="{active: tabIndex == 1}" @click="changeTab(1)">关注&nbsp;<u>{{user.follow}}</u></span>
+                </li>
+                <li><span :class="{active: tabIndex == 2}" @click="changeTab(2)">粉丝&nbsp;<u>{{user.follower}}</u></span>
+                </li>
+                <li><span :class="{active: tabIndex == 3}" @click="changeTab(3)">收藏&nbsp;<u>{{user.favorite}}</u></span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content" v-if="tabIndex == 0">
+        <div class="book-create" @click="bookCreateModalVisible">
+            <div class="create-logo"><span class="icon icon-plus"></span></div>
+            <span class="create-note">创建漫画册</span>
+        </div>
+        <div class="book" v-for="book in user.bookList">
+            <img class="book-cover" :src="book.cover" alt="">
+            <div class="book-info">
+                <p class="book-name">{{book.name}}</p>
+                <p class="book-desc">{{book.description}}</p>
+                <div class="book-style">
+                    <span class="item"><span class="icon icon-fire"></span>&nbsp;{{book.style}}</span>
+                    <em class="line"></em>
+                    <span class="item">漫画&nbsp;{{book.page}}</span>
+                    <a class="icon icon-link pull-right" :href="'../user/book?id=' + book.id"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" v-if="tabIndex == 1" v-cloak>
+        <div class="author">
+            <img class="author-portrait" src="../images/portrait.jpg" alt=""/>
+            <img class="author-avatar" src="../images/avatar.jpg" alt="">
+            <p class="author-name">王振琦</p>
+            <div class="author-info">
+                <p class="author-motto">心事浩渺连广宇</p>
+                <p class="author-profile">
+                    我是一个喜欢艺术热爱生活的小胖子
+                    我的梦想是成为一名架构师 但是我还不怎么会编程
+                    那就做一个艺术家吧 可是我漫画画的不好看 乐感也不好
+                    还是不要做架构师了 架构师什么的都是秃头
+                    也不要做艺术家了 艺术家什么的都是流氓
+                    比流氓还流氓的是专家学者
+                </p>
+                <div class="author-follow">
+                    <span class="item">作品&nbsp;18</span><em class="line"></em>
+                    <span class="item">粉丝&nbsp;1660</span>
+                    <a class="icon icon-link pull-right" href="author-book.html"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" v-if="tabIndex == 2" v-cloak>
+        <div class="author">
+            <img class="author-portrait" src="../images/portrait.jpg" alt=""/>
+            <img class="author-avatar" src="../images/avatar.jpg" alt="">
+            <p class="author-name">王振琦</p>
+            <div class="author-info">
+                <p class="author-motto">心事浩渺连广宇</p>
+                <p class="author-profile">
+                    我是一个喜欢艺术热爱生活的小胖子
+                    我的梦想是成为一名架构师 但是我还不怎么会编程
+                    那就做一个艺术家吧 可是我漫画画的不好看 乐感也不好
+                    还是不要做架构师了 架构师什么的都是秃头
+                    也不要做艺术家了 艺术家什么的都是流氓
+                    比流氓还流氓的是专家学者
+                </p>
+                <div class="author-follow">
+                    <span class="item">作品&nbsp;18</span><em class="line"></em>
+                    <span class="item">粉丝&nbsp;1660</span>
+                    <a class="icon icon-link pull-right" href="author-book.html"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" v-if="tabIndex == 3" v-cloak>
+        <div class="book">
+            <img class="book-cover" src="../images/portrait.jpg" alt="">
+            <div class="book-info">
+                <p class="book-name">漫十年</p>
+                <p class="book-desc">
+                    五月初
+                    屹立在温暖的阳光下
+                    心情也变得柔和起来
+                    那些你曾期待的 却放弃你的
+                    那些你不在意的 你已放弃的
+                    都成了自己辛辛苦苦的独角戏
+                    在新的生活到来之前
+                    在煎熬中最后翻阅那些过往
+                    一番不舍与惋惜之后
+                    才发觉一切是那么的不值得
+                    原来实现愿望是这么的难
+                    我用了这么久才能去忘记你
+                </p>
+                <div class="book-style">
+                    <span class="item"><span class="icon icon-fire"></span>&nbsp;清新</span><em class="line"></em>
+                    <span class="item">漫画&nbsp;16</span>
+                    <a class="icon icon-link pull-right" href="author-book.html"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
+</footer>
+<div id="bookCreateForm" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">创建漫画册</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content">
+            <form id="createForm" class="form-horizontal book-form">
+                <div class="form-group cover-group">
+                    <label class="form-label">封面</label>
+                    <img class="form-cover" :src="book.cover">
+                    <input id="file" type="file" @change="changeCover" hidden/>
+                    <button class="btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
+                        <span class="icon icon-link"></span>&nbsp;选择图片
+                    </button>
+                    <button class="btn-pick-cancel" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
+                    </button>
+                </div>
+                <div class="form-group middle">
+                    <label class="form-label">名称</label>
+                    <input class="form-control" type="text" v-model="book.name"/>
+                </div>
+                <div class="form-group middle">
+                    <label class="form-label">风格</label>
+                    <select class="form-control" v-model="book.style">
+                        <option selected disabled>请选择</option>
+                        <option value="古典">古典</option>
+                        <option value="热血">热血</option>
+                        <option value="唯美">唯美</option>
+                        <option value="清新">清新</option>
+                        <option value="推理">推理</option>
+                        <option value="爆笑">爆笑</option>
+                        <option value="悬疑">悬疑</option>
+                        <option value="萌系">萌系</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">简介</label>
+                    <textarea class="form-area" v-model="book.description"></textarea>
+                </div>
+                <button class="btn pull-right" type="button" @click="createBook" :disabled="isDisabled">
+                    {{action}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
+    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/bmob.js"></script>
+<script src="../js/nemo.js"></script>
+<script src="../js/user-blog.js"></script>
+</body>
+</html>
