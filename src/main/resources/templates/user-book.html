@@ -41,11 +41,9 @@
             <div class="book-form">
                 <div class="book-info">
                     <p class="book-name">{{book.name}}</p>
-                    <p class="book-favor">
-                        <span class="item">风格&nbsp;&nbsp;{{book.style}}</span>
-                        <span class="item">·</span>
-                        <span class="item">漫画&nbsp;{{book.page}}</span>
-                        <span class="item">·</span>
+                    <p class="book-star">
+                        <span class="item">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;</span>
+                        <span class="item">章节&nbsp;{{book.page}}&nbsp;&nbsp;</span>
                         <span class="item">收藏&nbsp;{{book.favor}}</span>
                     </p>
                     <p class="book-desc">{{book.description}}</p>
@@ -66,10 +64,12 @@
         </div>
     </div>
     <div class="content">
-        <div class="page" v-for="(page, index) in book.pageList" v-cloak>
-            <img class="page-image" :src="page.image"/>
-            <p class="page-no">{{index + 1}}</p>
-            <a class="page-url" :href="'../user/page?id=' + page.id"></a>
+        <p class="title">课程章节</p>
+        <div class="lesson" v-for="(page, index) in book.pageList" v-cloak>
+            <p class="lesson-no">{{index + 1}}</p>
+            <p class="lesson-name">{{page.name}}</p>
+            <p class="lesson-play"></p>
+            <button class="lesson-study" type="button" @click="playVideo(index)">开始学习</button>
         </div>
     </div>
 </main>
@@ -96,8 +96,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn-pick-cancel pull-right" @click="invisible" :disabled="isDisabled">取消</button>
-            <button class="btn-pick-save pull-right" @click="uploadPage" :disabled="isDisabled">{{action}}
+            <button class="btn-default pull-right" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" @click="uploadPage" :disabled="isDisabled">{{action}}
             </button>
         </div>
     </div>
@@ -106,7 +106,8 @@
     <div class="trans-content">
         <p class="trans-url"><a :href="'../user/page?id=' + page.id"><span class="icon icon-edit"></span>编辑章节信息</a></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
-        <img class="trans-page" :src="page.image" alt=""/>
+        <!--<img class="trans-page" :src="page.image" alt=""/>-->
+        <video :src="page.image" class="trans-page" controls></video>
         <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
         <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>

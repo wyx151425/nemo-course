@@ -54,10 +54,11 @@ function getMessage(statusCode) {
 const header = new Vue({
     el: "#header",
     data: {
-        defaultImg: "this.src='../images/default.png'",
         isVisible: false,
         timer: null,
-        user: {}
+        user: {
+            avatar: "../images/default-avatar.jpg"
+        }
     },
     methods: {
         visible: function () {

@@ -42,10 +42,8 @@
                 <p class="book-name">{{book.name}}<span class="icon icon-favor" :class="{'orange-favor': isFavorite}" @click="favoriteBook"></span></p>
                 <p class="book-desc">{{book.description}}</p>
                 <p class="book-style">
-                    <span class="item">风格&nbsp;&nbsp;{{book.style}}</span>
-                    <span class="item">·</span>
-                    <span class="item">漫画&nbsp;{{book.page}}</span>
-                    <span class="item">·</span>
+                    <span class="item">{{book.style}}&nbsp;&nbsp;&nbsp;</span>
+                    <span class="item">章节&nbsp;{{book.page}}&nbsp;&nbsp;&nbsp;</span>
                     <span class="item">收藏&nbsp;{{book.favor}}</span>
                 </p>
             </div>
@@ -80,7 +78,8 @@
     <div class="trans-content">
         <p class="trans-url"></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
-        <img class="trans-page" :src="page.image" alt="">
+        <!--<img class="trans-page" :src="page.image" alt="">-->
+        <video :src="page.image" class="trans-page" controls></video>
         <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
         <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>
@@ -95,6 +94,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/nemo.js"></script>
-<script src="../js/user-book.js"></script>
+<script src="../js/author-book.js"></script>
 </body>
 </html>

@@ -419,13 +419,9 @@ select.form-control {
     width: 108px;
     height: 42px;
     color: #fff;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
     background-color: #000;
-}
-
-.btn-default {
-
 }
 
 .btn-block {
@@ -438,6 +434,20 @@ select.form-control {
 
 .btn:disabled {
     background-color: #888;
+}
+
+.btn-default {
+    width: 108px;
+    height: 42px;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #bbb;
+}
+
+.btn-default:hover, .btn-default:active {
+    background-color: #ddd;
 }
 
 .btn-picker {
@@ -482,10 +492,12 @@ select.form-control {
 
 .pull-left {
     float: left;
+    margin-right: 16px;
 }
 
 .pull-right {
     float: right;
+    margin-left: 16px;
 }
 
 .inline {

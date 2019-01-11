@@ -1,7 +1,7 @@
 .theme {
     position: relative;
     width: 1200px;
-    height: 464px;
+    height: 514px;
     box-sizing: border-box;
     margin-bottom: 40px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
@@ -10,7 +10,7 @@
 .user-portrait {
     display: block;
     width: 1200px;
-    height: 400px;
+    height: 450px;
     object-fit: cover;
 }
 
@@ -20,7 +20,7 @@
     top: 0;
     text-align: center;
     width: 1200px;
-    height: 400px;
+    height: 450px;
     margin: auto;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.3);
@@ -43,7 +43,7 @@
 .user-name {
     font-size: 36px;
     text-align: center;
-    margin-top: 12px;
+    margin-top: 16px;
 }
 
 .user-motto {
@@ -110,7 +110,7 @@
 
 .content {
     width: 1220px;
-    min-height: 300px;
+    min-height: 600px;
 }
 
 .book-create {

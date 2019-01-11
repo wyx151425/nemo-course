@@ -5,10 +5,10 @@ const main = new Vue({
         isTrans: false,
         book: {
             author: {
-                avatar: "../images/default.png",
+                avatar: "../images/default-avatar.jpg",
                 name: ""
             },
-            cover: "../images/default.png",
+            cover: "",
             name: "",
             style: "",
             page: 0,
@@ -48,6 +48,9 @@ const main = new Vue({
         transModalInvisible: function () {
             this.isTrans = false;
             this.isList = true;
+        },
+        playVideo: function (index) {
+            transModal.visible(index);
         }
     },
     mounted: function () {
@@ -70,21 +73,20 @@ const transModal = new Vue({
         isVisible: false,
         index: 0,
         page: {},
-        prevUrl: "",
-        nextUrl: "",
         pageList: [],
         bookName: ""
     },
     methods: {
-        visible: function () {
+        visible: function (index) {
+            if (index) {
+                this.index = index;
+            } else {
+                this.index = 0;
+            }
             this.bookName = main.getBookName();
             this.pageList = main.getPageList();
             if (this.pageList.length > 0) {
-                this.index = 0;
                 this.page = this.pageList[this.index];
-                if (this.pageList.length > 1) {
-                    this.nextUrl = this.pageList[this.index + 1].image;
-                }
                 this.isVisible = true;
             }
         },
@@ -95,26 +97,14 @@ const transModal = new Vue({
         },
         prevTrans: function () {
             if (this.index > 0) {
-                this.nextUrl = this.page.image;
                 this.index--;
                 this.page = this.pageList[this.index];
-                if (this.index > 0) {
-                    this.prevUrl = this.pageList[this.index - 1].image;
-                } else {
-                    this.prevUrl = "";
-                }
             }
         },
         nextTrans: function () {
             if (this.index < this.pageList.length - 1) {
-                this.prevUrl = this.page.image;
                 this.index++;
                 this.page = this.pageList[this.index];
-                if (this.index < this.pageList.length - 1) {
-                    this.nextUrl = this.pageList[this.index + 1].image;
-                } else {
-                    this.nextUrl = "";
-                }
             }
         }
     }
@@ -140,7 +130,8 @@ const uploadModal = new Vue({
                 popoverSpace.append("请填写章节名称", false);
                 return;
             }
-            let file = document.getElementById("file").files[0];
+            let name = this.name;
+            let file = document.getElementById("file");
             if (!file) {
                 popoverSpace.append("请选择章节视频", false);
                 return;
@@ -152,6 +143,7 @@ const uploadModal = new Vue({
             bmobFile.save().then(function (obj) {
                 axios.post(requestContext + "api/lessons", {
                     book: {id: main.getBookId()},
+                    name: name,
                     image: obj.url()
                 }).then(function (response) {
                     let statusCode = response.data.statusCode;

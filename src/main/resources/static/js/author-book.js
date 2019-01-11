@@ -53,6 +53,9 @@ const main = new Vue({
             this.isTrans = false;
             this.isList = true;
         },
+        playVideo: function (index) {
+            transModal.visible(index);
+        },
         favoriteBook: function () {
             this.isDisabled = true;
             if (!this.isFavorite) {
@@ -123,21 +126,20 @@ const transModal = new Vue({
         isVisible: false,
         index: 0,
         page: {},
-        prevUrl: "",
-        nextUrl: "",
         pageList: [],
         bookName: ""
     },
     methods: {
-        visible: function () {
+        visible: function (index) {
+            if (index) {
+                this.index = index;
+            } else {
+                this.index = 0;
+            }
             this.bookName = main.getBookName();
             this.pageList = main.getPageList();
             if (this.pageList.length > 0) {
-                this.index = 0;
                 this.page = this.pageList[this.index];
-                if (this.pageList.length > 1) {
-                    this.nextUrl = this.pageList[this.index + 1].image;
-                }
                 this.isVisible = true;
             }
         },
@@ -148,26 +150,14 @@ const transModal = new Vue({
         },
         prevTrans: function () {
             if (this.index > 0) {
-                this.nextUrl = this.page.image;
                 this.index--;
                 this.page = this.pageList[this.index];
-                if (this.index > 0) {
-                    this.prevUrl = this.pageList[this.index - 1].image;
-                } else {
-                    this.prevUrl = "";
-                }
             }
         },
         nextTrans: function () {
             if (this.index < this.pageList.length - 1) {
-                this.prevUrl = this.page.image;
                 this.index++;
                 this.page = this.pageList[this.index];
-                if (this.index < this.pageList.length - 1) {
-                    this.nextUrl = this.pageList[this.index + 1].image;
-                } else {
-                    this.nextUrl = "";
-                }
             }
         }
     }

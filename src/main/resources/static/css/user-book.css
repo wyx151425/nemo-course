@@ -1,15 +1,14 @@
 .theme {
     width: 1200px;
-    height: 460px;
+    height: 540px;
     margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .curtain {
     position: relative;
     width: 1200px;
-    height: 400px;
-    border-bottom: solid 1px #dedfe0;
+    height: 480px;
 }
 
 .book-cover {
@@ -17,7 +16,7 @@
     top: 0;
     display: block;
     width: 1200px;
-    height: 400px;
+    height: 480px;
     object-fit: cover;
 }
 
@@ -26,7 +25,7 @@
     display: flex;
     top: 0;
     width: 1200px;
-    height: 330px;
+    height: 410px;
     background-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -39,12 +38,13 @@
 
 .book-name {
     font-size: 30px;
+    line-height: 42px;
 }
 
 .book-star {
     overflow: hidden;
     text-align: center;
-    margin: 20px 0 12px;
+    line-height: 60px;
 }
 
 .book-star .item {
@@ -53,9 +53,10 @@
 
 .book-desc {
     font-size: 15px;
-    line-height: 22px;
+    line-height: 25px;
     max-height: 110px;
     overflow: hidden;
+    text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
@@ -99,10 +100,6 @@
     background-color: transparent;
 }
 
-.btn-upload:hover {
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3), 0 0 5px rgba(255, 255, 255, 0.3);
-}
-
 .read-way {
     width: 1200px;
     height: 60px;
@@ -110,34 +107,34 @@
 }
 
 /*.list-way {*/
-    /*float: left;*/
-    /*display: block;*/
-    /*width: 20px;*/
-    /*height: 20px;*/
-    /*background: url(../images/icon.png) no-repeat -400px -2px;*/
-    /*margin-top: 20px;*/
-    /*margin-right: 20px;*/
-    /*margin-left: 24px;*/
-    /*cursor: pointer;*/
+/*float: left;*/
+/*display: block;*/
+/*width: 20px;*/
+/*height: 20px;*/
+/*background: url(../images/icon.png) no-repeat -400px -2px;*/
+/*margin-top: 20px;*/
+/*margin-right: 20px;*/
+/*margin-left: 24px;*/
+/*cursor: pointer;*/
 /*}*/
 
 /*.list-active {*/
-    /*background: url(../images/icon.png) no-repeat -400px -42px;*/
+/*background: url(../images/icon.png) no-repeat -400px -42px;*/
 /*}*/
 
 /*.trans-way {*/
-    /*float: left;*/
-    /*display: block;*/
-    /*width: 20px;*/
-    /*height: 20px;*/
-    /*background: url(../images/icon.png) no-repeat -440px -2px;*/
-    /*margin-top: 20px;*/
-    /*margin-right: 20px;*/
-    /*cursor: pointer;*/
+/*float: left;*/
+/*display: block;*/
+/*width: 20px;*/
+/*height: 20px;*/
+/*background: url(../images/icon.png) no-repeat -440px -2px;*/
+/*margin-top: 20px;*/
+/*margin-right: 20px;*/
+/*cursor: pointer;*/
 /*}*/
 
 /*.trans-active {*/
-    /*background: url(../images/icon.png) no-repeat -440px -42px;*/
+/*background: url(../images/icon.png) no-repeat -440px -42px;*/
 /*}*/
 
 .list-way {
@@ -176,57 +173,69 @@
 }
 
 .content {
-    width: 1220px;
+    width: 1200px;
+    min-height: 600px;
     margin-bottom: 20px;
 }
 
-.page {
-    display: inline-block;
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson {
     position: relative;
-    width: 224px;
-    height: 224px;
-    margin: 0 20px 25px 0;
+    width: 1000px;
+    height: 75px;
+    margin: 12px 100px;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.page-image {
+.lesson:hover {
+    cursor: pointer;
+}
+
+.lesson:hover > .lesson-study {
     display: block;
-    width: 224px;
-    height: 224px;
-    object-fit: cover;
 }
 
-.page-info {
-    position: absolute;
-    top: 0;
-    width: 224px;
-    height: 224px;
-}
-
-.page-no {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    width: 30px;
-    height: 30px;
-    color: #fff;
-    line-height: 30px;
+.lesson-no {
+    float: left;
+    margin: 20px;
+    min-width: 31px;
+    height: 31px;
+    color: #000;
+    line-height: 31px;
     text-align: center;
-    border: 2px solid #fff;
+    border: 2px solid #000;
     border-radius: 5px;
     font-size: 16px;
 }
 
-.page-url {
-    position: absolute;
-    top: 0;
-    width: 224px;
-    height: 224px;
+.lesson-name {
+    float: left;
+    height: 75px;
+    color: #000;
+    line-height: 75px;
+    font-size: 15px;
 }
 
-.page-url:hover, .page-url:active {
-    background-color: rgba(0, 0, 0, 0.05);
+.lesson-study {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    float: right;
+    width: 94px;
+    height: 35px;
+    color: #000;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background-color: transparent;
 }
 
 .new-image {
@@ -238,8 +247,14 @@
 
 .btn {
     width: 64px;
-    height: 32px;
-    border-radius: 2px;
+    height: 34px;
+    border-radius: 1px;
+}
+
+.btn-default {
+    width: 64px;
+    height: 34px;
+    border-radius: 1px;
 }
 
 .btn-cancel {

@@ -50,7 +50,7 @@
                 <div class="subscribe">
                     <ul>
                         <li><p class="num">{{author.book}}</p>
-                            <p class="note">漫画</p></li>
+                            <p class="note">课程</p></li>
                         <li><p class="num">{{author.follow}}</p>
                             <p class="note">关注</p></li>
                         <li><p class="num">{{author.follower}}</p>
@@ -64,8 +64,8 @@
         <div class="triangle"></div>
     </div>
     <div class="content">
-        <p class="title">漫画册</p>
-        <p class="title-note">如果喜欢他的作品 那就关注他吧</p>
+        <p class="title">旗下课程</p>
+        <p class="title-note">如果喜欢他的课程 那就关注他吧</p>
         <div class="book-list">
             <div class="book" v-for="book in author.bookList">
                 <img class="book-cover" :src="book.cover" alt="">
@@ -73,9 +73,9 @@
                     <p class="book-name">{{book.name}}</p>
                     <p class="book-desc">{{book.description}}</p>
                     <div class="book-style">
-                        <span class="item"><span class="icon icon-fire"></span>&nbsp;{{book.style}}</span>
+                        <span class="item">{{book.style}}</span>
                         <em class="line"></em>
-                        <span class="item">漫画&nbsp;{{book.page}}</span>
+                        <span class="item">章节&nbsp;{{book.page}}</span>
                         <a class="icon icon-link pull-right" :href="'../author/book?id=' + book.id"></a>
                     </div>
                 </div>
