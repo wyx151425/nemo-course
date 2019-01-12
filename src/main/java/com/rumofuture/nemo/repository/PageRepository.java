@@ -29,6 +29,13 @@ public interface PageRepository {
     void delete(Integer id);
 
     /**
+     * 删除课程下的全部章节
+     *
+     * @param id 课程数据ID
+     */
+    void deleteAllByBookId(Integer id);
+
+    /**
      * 更新漫画分页
      *
      * @param page 漫画分页对象

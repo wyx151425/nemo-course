@@ -48,66 +48,77 @@ const main = new Vue({
 const updateModal = new Vue({
     el: "#updateModal",
     data: {
-        image: "",
+        name: "",
         action: "更新",
         isVisible: false,
-        isChosen: false,
         isDisabled: false
     },
     methods: {
         visible: function () {
+            this.name = main.getPage().name;
             this.isVisible = true;
         },
         invisible: function () {
-            this.image = "";
-            this.isChosen = false;
             this.isVisible = false;
         },
-        choosePage: function () {
-            document.getElementById("file").click();
-        },
-        analyzePage: function () {
-            this.isChosen = true;
-            this.image = getFileNativeUrl(document.getElementById("file").files[0]);
-        },
-        cancelChoice: function () {
-            this.image = "";
-            document.getElementById("file").value = "";
-            this.isChosen = false;
-        },
         updatePage: function () {
+            if ("" === this.name) {
+                popoverSpace.append("请填写章节名称", false);
+                return;
+            }
+            let name = this.name;
             this.isDisabled = true;
             this.action = "正在更新";
-            Bmob.initialize("75b6a15a8791635241707418e52dcb90", "cf34d2d2b2c325fcf58079c3063526f4");
             let file = document.getElementById("file");
-            let bmobFile = new Bmob.File(file.value, file.files[0]);
-            bmobFile.save().then(
-                function (obj) {
-                    let page = main.getPage();
-                    page.image = obj.url();
-                    axios.put(requestContext + "api/pages", page)
-                        .then(function (response) {
-                            let statusCode = response.data.statusCode;
-                            if (200 === statusCode) {
-                                main.setPageImage(obj.url());
-                                updateModal.updateResult("更新成功", true);
-                            } else {
-                                updateModal.updateResult("更新失败", false);
-                            }
-                        })
-                        .catch(function () {
-                            updateModal.updateResult("服务器访问失败", false);
-                        });
-                },
-                function () {
-                    updateModal.updateResult("更新失败", false);
-                });
+            if (!file.files[0]) {
+                console.log("Execute1");
+                let page = main.getPage();
+                page.name = name;
+                axios.put(requestContext + "api/lessons", page)
+                    .then(function (response) {
+                        let statusCode = response.data.statusCode;
+                        if (200 === statusCode) {
+                            updateModal.updateResult("更新成功", true);
+                        } else {
+                            updateModal.updateResult("更新失败", false);
+                        }
+                    })
+                    .catch(function () {
+                        updateModal.updateResult("服务器访问失败", false);
+                    });
+            } else {
+                console.log("Execute2");
+                Bmob.initialize("75b6a15a8791635241707418e52dcb90", "cf34d2d2b2c325fcf58079c3063526f4");
+                let bmobFile = new Bmob.File(file.value, file.files[0]);
+                bmobFile.save().then(
+                    function (obj) {
+                        let page = main.getPage();
+                        page.name = name;
+                        page.image = obj.url();
+                        axios.put(requestContext + "api/lessons", page)
+                            .then(function (response) {
+                                let statusCode = response.data.statusCode;
+                                if (200 === statusCode) {
+                                    main.setPageImage(obj.url());
+                                    updateModal.updateResult("更新成功", true);
+                                } else {
+                                    updateModal.updateResult("更新失败", false);
+                                }
+                            })
+                            .catch(function () {
+                                updateModal.updateResult("服务器访问失败", false);
+                            });
+                    },
+                    function () {
+                        updateModal.updateResult("更新失败", false);
+                    });
+            }
         },
-        updateResult: function (message, isSuccess) {
-            popoverSpace.append(message, isSuccess);
+        updateResult: function (message, success) {
+            popoverSpace.append(message, success);
             this.action = "更新";
             this.isDisabled = false;
-            if (isSuccess) {
+            if (success) {
                 this.invisible();
             }
         }
@@ -118,21 +129,20 @@ const deleteModal = new Vue({
     el: "#deleteModal",
     data: {
         isVisible: false,
-        deleting: false,
-        deletePrompt: ""
+        isDisabled: false,
+        action: "删除"
     },
     methods: {
         visible: function () {
-            this.deletePrompt = "您确定要删除该漫画分页吗？";
             this.isVisible = true;
         },
         invisible: function () {
             this.isVisible = false;
         },
         deletePage: function () {
-            this.deleting = true;
-            this.deletePrompt = "正在删除...";
-            let url = requestContext + "api/pages/" + main.getPageId();
+            this.isDisabled = true;
+            this.action = "正在删除";
+            let url = requestContext + "api/lessons/" + main.getPageId();
             axios.delete(url)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
@@ -142,15 +152,13 @@ const deleteModal = new Vue({
                         deleteModal.deleteResult("删除失败", false);
                     }
                 }).catch(function () {
-                deleteModal.deleteResult("系统错误", false);
+                deleteModal.deleteResult("服务器访问失败", false);
             });
         },
         deleteResult: function (message, success) {
             popoverSpace.append(message, success);
-            this.deleting = false;
-            if (success) {
-                this.isVisible = false;
-            }
+            this.isDisabled = false;
+            this.action = "删除";
         }
     }
 });

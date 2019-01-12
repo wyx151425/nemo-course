@@ -155,58 +155,69 @@
 }
 
 .content {
-    width: 1220px;
-    margin-bottom: 35px;
+    width: 1200px;
+    min-height: 600px;
+    margin-bottom: 20px;
 }
 
-.page {
-    display: inline-block;
-    position: relative;
-    width: 224px;
-    height: 224px;
-    margin: 0 20px 25px 0;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.page-image {
-    display: block;
-    width: 224px;
-    height: 224px;
-    object-fit: cover;
-}
-
-.page-info {
-    position: absolute;
-    top: 0;
-    width: 224px;
-    height: 224px;
-}
-
-.page-info:hover, .page-info:active {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.page-no {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    width: 30px;
-    height: 30px;
-    color: #fff;
-    line-height: 30px;
+.title {
+    font-size: 24px;
+    font-weight: 700;
     text-align: center;
-    border: 2px solid #fff;
+    margin-bottom: 20px;
+}
+
+.lesson {
+    position: relative;
+    width: 1000px;
+    height: 75px;
+    margin: 12px 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.lesson:hover {
+    cursor: pointer;
+}
+
+.lesson:hover > .lesson-study {
+    display: block;
+}
+
+.lesson-no {
+    float: left;
+    margin: 20px;
+    min-width: 31px;
+    height: 31px;
+    color: #000;
+    line-height: 31px;
+    text-align: center;
+    border: 2px solid #000;
     border-radius: 5px;
     font-size: 16px;
 }
 
-.page-url {
+.lesson-name {
+    float: left;
+    height: 75px;
+    color: #000;
+    line-height: 75px;
+    font-size: 15px;
+}
+
+.lesson-study {
+    display: none;
     position: absolute;
-    top: 0;
-    width: 222px;
-    height: 222px;
+    top: 20px;
+    right: 20px;
+    float: right;
+    width: 94px;
+    height: 35px;
+    color: #000;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background-color: transparent;
 }
 
 .new-image {
@@ -311,7 +322,7 @@
 .trans-nav {
     position: absolute;
     top: 35%;
-    width: 180px;
+    width: 100px;
     height: 120px;
     cursor: pointer;
 }
@@ -337,12 +348,12 @@
 }
 
 .arrow-prev {
-    left: 5px;
+    left: 15px;
     background: url("../images/icon/return.png") no-repeat center;
 }
 
 .arrow-next {
-    right: 5px;
+    right: 15px;
     background: url("../images/icon/enter.png") no-repeat center;
 }
 

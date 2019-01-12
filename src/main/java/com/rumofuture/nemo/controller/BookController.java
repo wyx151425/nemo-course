@@ -33,8 +33,20 @@ public class BookController extends NemoFacade {
         return new Response<>(book);
     }
 
+    @PutMapping(value = "books")
+    public Response<Book> actionUpdateBook(@RequestBody Book book) {
+        bookService.updateBook(book);
+        return new Response<>();
+    }
+
+    @DeleteMapping(value = "books/{id}")
+    public Response<Book> actionDeleteBook(@PathVariable(value = "id") Integer id) {
+        bookService.deleteBook(id);
+        return new Response<>();
+    }
+
     @GetMapping(value = "books/{id}")
-    public Response<Book> actionQueryBookContainsAuthor(@PathVariable("id") Integer id) {
+    public Response<Book> actionQueryBookContainsAuthor(@PathVariable(value = "id") Integer id) {
         Book book = bookService.findBookContainsAuthorAndPageList(id);
         return new Response<>(book);
     }

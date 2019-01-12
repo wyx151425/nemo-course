@@ -21,6 +21,6 @@
     </select>
 
     <select id="findFavoriteBookList" parameterType="int" resultType="book">
-        SELECT * FROM book WHERE id IN (SELECT book_id FROM favorite WHERE status = 1 AND user_id = #{id})
+        SELECT * FROM book WHERE status > 0 AND id IN (SELECT book_id FROM favorite WHERE status = 1 AND user_id = #{id})
     </select>
 </mapper>

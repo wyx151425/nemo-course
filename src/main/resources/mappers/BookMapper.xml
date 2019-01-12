@@ -40,8 +40,6 @@
         <set>
             <if test="status != null">status = #{status},</if>
             <if test="name != null">name = #{name},</if>
-            <if test="style != null">style = #{style},</if>
-            <if test="type != null">type = #{type},</if>
             <if test="description != null">description = #{description},</if>
             <if test="cover != null">cover = #{cover},</if>
             <if test="page != null">page = #{page},</if>
@@ -49,6 +47,11 @@
             update_at = NOW()
         </set>
         WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="book">
+        UPDATE book SET status = 0, update_at = NOW() WHERE id = #{id}
     </update>
 
     <!-- 根据ID查询漫画册 -->
@@ -67,6 +70,6 @@
     </select>
 
     <select id="findBookListByAuthorId" parameterType="int" resultType="book">
-        SELECT * FROM book WHERE author_id = #{authorId}
+        SELECT * FROM book WHERE status > 0 AND author_id = #{authorId}
     </select>
 </mapper>

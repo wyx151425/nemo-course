@@ -3,12 +3,11 @@ main.container {
 }
 
 .content {
-    width: 628px;
+    width: 630px;
     height: auto;
-    border: solid 1px #dedfe0;
     margin: 0 auto;
     background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
 }
 
@@ -16,13 +15,13 @@ main.container {
     display: flex;
     width: 604px;
     height: 64px;
-    padding: 12px;
+    padding: 16px;
     border-bottom: 1px solid #dedfe0;
 }
 
 .book-cover {
-    width: 58px;
-    height: 58px;
+    width: 80px;
+    height: 60px;
     border: 3px solid #dedfe0;
     object-fit: cover;
 }
@@ -51,14 +50,14 @@ main.container {
     -webkit-line-clamp: 1;
 }
 
-.page-image {
+.lesson-video {
     display: block;
-    width: 628px;
-    height: auto;
+    width: 630px;
+    max-height: 600px;
 }
 
 .action-nav {
-    width: 628px;
+    width: 630px;
     height: 64px;
     border-top: solid 1px #dedfe0;
     display: flex;
@@ -149,4 +148,13 @@ main.container {
 
 .icon-edit:before {
     content: "\e065";
+}
+
+input[type="file"].form-control {
+    line-height: 0;
+    padding: 8px 12px;
+}
+
+.form-label {
+    margin-left: 10px;
 }

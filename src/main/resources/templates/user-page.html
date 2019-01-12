@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - 微课学习平台</title>
+    <title>NRumo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/user-page.css"/>
@@ -12,7 +12,7 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="../index">Nemo</a>
+            <a class="logo" href="../index">Rumo</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt="头像"/>
@@ -26,7 +26,6 @@
                 </div>
             </div>
             <span class="line"></span>
-            <a class="btn-publish" href="../book/create"><span class="icon icon-plus"></span></a>
             <form class="form-search" action="">
                 <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
                 <button class="icon icon-search btn-search" type="submit"></button>
@@ -43,7 +42,7 @@
                 <p class="book-desc">{{page.book.description}}</p>
             </div>
         </a>
-        <img class="page-image" :src="page.image" alt="">
+        <video class="lesson-video" :src="page.image" controls="controls"></video>
         <div class="action-nav">
             <div class="action" @click="updateModalVisible">
                 <span class="icon icon-edit"></span>
@@ -66,19 +65,21 @@
             <span class="modal-title">更新章节</span>
             <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
         </div>
-        <div class="modal-content">
-            <div class="modal-box">
-                <div v-if="!isChosen">
-                    <button class="btn-picker" type="button" @click="choosePage"><span class="icon icon-link"></span>&nbsp;选择图片</button>
-                    <p class="picker-note">图片需小于10M；如有来源，请注明</p>
-                </div>
-                <img class="new-image" :src="image" alt="" v-if="isChosen"/>
-                <input id="file" type="file" @change="analyzePage" hidden/>
+        <div class="modal-content form-horizontal">
+            <div class="form-group">
+                <label class="form-label">名称</label>
+                <input class="form-control" type="text" v-model="name"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">视频</label>
+                <input id="file" class="form-control" type="file"/>
             </div>
         </div>
-        <div class="modal-footer" v-if="isChosen">
-            <button class="btn-pick-cancel pull-right" @click="cancelChoice" :disabled="isDisabled">取消</button>
-            <button class="btn-pick-save pull-right" @click="updatePage" :disabled="isDisabled">{{action}}</button>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" @click="updatePage" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
         </div>
     </div>
 </div>
@@ -89,11 +90,13 @@
             <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
         </div>
         <div class="modal-content">
-            <p class="delete-prompt">{{deletePrompt}}</p>
+            <p class="delete-prompt">您确定要删除该章节吗？</p>
         </div>
-        <div class="modal-footer" v-if="!deleting">
-            <button class="btn btn-cancel pull-right" type="button" @click="invisible">取消</button>
-            <button class="btn pull-right" type="button" @click="deletePage">确定</button>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" type="button" @click="deletePage" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
         </div>
     </div>
 </div>

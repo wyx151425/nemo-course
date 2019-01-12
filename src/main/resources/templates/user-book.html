@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - 微课学习平台</title>
+    <title>Rumo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/user-book.css"/>
@@ -26,7 +26,6 @@
                 </div>
             </div>
             <span class="line"></span>
-            <a class="btn-publish" href="../book/create"><span class="icon icon-plus"></span></a>
             <form class="form-search" action="">
                 <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
                 <button class="icon icon-search btn-search" type="submit"></button>
@@ -56,6 +55,15 @@
                 </a>
                 <button class="btn-upload" @click="uploadModalVisible"><span class="icon icon-link"></span>&nbsp;&nbsp;添加章节
                 </button>
+                <div class="book-cog" @mouseover="visible" @mouseout="invisible"><span class="icon icon-cog"></span>
+                </div>
+            </div>
+            <div class="cog-menu" v-if="isVisible" @mouseover="visible" @mouseout="invisible" v-cloak>
+                <p class="cog-action cog-line" ><span class="icon icon-bookmark"></span>发布
+                </p>
+                <p class="cog-action cog-line" @click="updateBookModalVisible"><span class="icon icon-edit"></span>编辑
+                </p>
+                <p class="cog-action" @click="deleteModalVisible"><span class="icon icon-trash"></span>删除</p>
             </div>
         </div>
         <div class="read-way">
@@ -97,7 +105,64 @@
         </div>
         <div class="modal-footer">
             <button class="btn-default pull-right" @click="invisible" :disabled="isDisabled">取消</button>
-            <button class="btn pull-right" @click="uploadPage" :disabled="isDisabled">{{action}}
+            <button class="btn pull-right" @click="uploadPage" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
+        </div>
+    </div>
+</div>
+<div id="bookUpdateModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">修改课程信息</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content form-horizontal">
+            <div class="form-group cover-group">
+                <label class="form-label">封面</label>
+                <img class="form-cover" :src="book.cover">
+                <input id="cover" type="file" @change="changeCover" hidden/>
+                <button class="btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
+                    <span class="icon icon-link"></span>&nbsp;更换封面
+                </button>
+                <button class="btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
+                </button>
+            </div>
+            <div class="form-group middle">
+                <label class="form-label">名称</label>
+                <input class="form-control" type="text" v-model="book.name"/>
+            </div>
+            <div class="form-group middle">
+                <label class="form-label">年级</label>
+                <p class="form-control">{{book.style}}</p>
+            </div>
+            <div class="form-group middle">
+                <label class="form-label">学科</label>
+                <p class="form-control">{{book.type}}</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">简介</label>
+                <textarea class="form-area" v-model="book.description"></textarea>
+            </div>
+            <button class="btn pull-right" type="button" @click="updateBook" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">删除课程</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content">
+            <p class="delete-prompt">您确定要删除该课程吗？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" type="button" @click="deleteBook" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
             </button>
         </div>
     </div>
@@ -106,16 +171,13 @@
     <div class="trans-content">
         <p class="trans-url"><a :href="'../user/page?id=' + page.id"><span class="icon icon-edit"></span>编辑章节信息</a></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
-        <!--<img class="trans-page" :src="page.image" alt=""/>-->
         <video :src="page.image" class="trans-page" controls></video>
         <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
         <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>
-            <img class="trans-preview prev-right" :src="prevUrl" alt="">
         </div>
         <div class="trans-nav nav-next" title="下一张" @click="nextTrans">
             <span class="nav-arrow arrow-next"></span>
-            <img class="trans-preview next-left" :src="nextUrl" alt="">
         </div>
     </div>
 </div>

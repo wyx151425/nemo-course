@@ -211,7 +211,7 @@ a, a:link, a:hover, a:active, a:visited, u {
     width: 360px;
     height: 32px;
     margin-top: 15px;
-    margin-right: 45px;
+    margin-right: 40px;
     border: 1px solid #bbb;
 }
 
@@ -419,7 +419,7 @@ select.form-control {
     width: 108px;
     height: 42px;
     color: #fff;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
     background-color: #000;
 }
@@ -429,11 +429,16 @@ select.form-control {
 }
 
 .btn:hover, .btn:active {
-    background-color: #444;
+    background-color: #333;
 }
 
 .btn:disabled {
-    background-color: #888;
+    cursor: not-allowed;
+    background-color: #999;
+}
+
+.btn .icon {
+    margin-right: 4px;
 }
 
 .btn-default {
@@ -447,44 +452,51 @@ select.form-control {
 }
 
 .btn-default:hover, .btn-default:active {
-    background-color: #ddd;
+    background-color: #eee;
+}
+
+.btn-default:disabled {
+    color: #888;
+    cursor: not-allowed;
+    background-color: #fff;
 }
 
 .btn-picker {
     width: 100px;
-    height: 32px;
-    color: #fff;
-    background-color: #22b4f6;
+    height: 34px;
+    color: #000;
+    background-color: transparent;
     font-size: 14px;
     cursor: pointer;
     border-radius: 2px;
+    border: 1px solid #000;
     /*font-family: '\5B8B\4F53', serif;*/
 }
 
 .btn-pick-save {
     float: left;
     width: 60px;
-    height: 32px;
-    color: #fff;
+    height: 34px;
+    color: #000;
     border-radius: 2px;
-    background-color: #22b4f6;
+    background-color: transparent;
     font-size: 14px;
     cursor: pointer;
+    border: 1px solid #000;
 }
 
 .btn-pick-save:disabled {
-    width: 80px;
-    background-color: #87ceeb;
+    width: 100px;
 }
 
 .icon-link:before {
     content: "\e144";
 }
 
-.btn-pick-cancel {
+.btn-link {
     width: 60px;
-    height: 32px;
-    color: #22b4f6;
+    height: 34px;
+    color: #000;
     font-size: 15px;
     background-color: transparent;
     cursor: pointer;
@@ -492,12 +504,12 @@ select.form-control {
 
 .pull-left {
     float: left;
-    margin-right: 16px;
+    margin-right: 14px;
 }
 
 .pull-right {
     float: right;
-    margin-left: 16px;
+    margin-left: 14px;
 }
 
 .inline {
@@ -619,6 +631,15 @@ input[type="checkbox"]:checked + span.checkbox {
     border-top: solid 1px #dedfe0;
 }
 
+.modal-footer > .btn, .modal-footer > .btn-default {
+    width: 64px;
+    height: 34px;
+}
+
+.modal-footer .btn:disabled {
+    width: 94px;
+}
+
 /* Response框 */
 .popover-space {
     position: fixed;
@@ -656,6 +677,54 @@ input[type="checkbox"]:checked + span.checkbox {
 
 .error {
     background-color: #f56c6c;
+}
+
+/* 旋转CSS */
+.rotate {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 2s linear infinite;
+    -moz-animation: rotate 2s linear infinite;
+    -o-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-moz-keyframes rotate {
+    from {
+        -moz-transform: rotate(0deg)
+    }
+    to {
+        -moz-transform: rotate(359deg)
+    }
+}
+
+@-o-keyframes rotate {
+    from {
+        -o-transform: rotate(0deg)
+    }
+    to {
+        -o-transform: rotate(359deg)
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(359deg)
+    }
 }
 
 /* icon部分 */

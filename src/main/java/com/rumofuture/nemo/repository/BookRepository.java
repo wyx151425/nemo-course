@@ -29,6 +29,13 @@ public interface BookRepository {
     void update(Book book);
 
     /**
+     * 删除课程对象
+     *
+     * @param id 课程对象ID
+     */
+    void delete(Integer id);
+
+    /**
      * 根据ID查询漫画册对象
      *
      * @param id 漫画册ID

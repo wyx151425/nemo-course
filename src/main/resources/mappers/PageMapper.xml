@@ -25,7 +25,11 @@
     </insert>
 
     <update id="delete" parameterType="int">
-        UPDATE page SET status = 0 WHERE id = #{id}
+        UPDATE page SET status = 0, update_at = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="deleteAllByBookId" parameterType="int">
+        UPDATE page SET status = 0, update_at = NOW() WHERE book_id = #{id}
     </update>
 
     <update id="update" parameterType="page">

@@ -238,45 +238,6 @@
     background-color: transparent;
 }
 
-.new-image {
-    display: block;
-    width: 378px;
-    height: 378px;
-    object-fit: cover;
-}
-
-.btn {
-    width: 64px;
-    height: 34px;
-    border-radius: 1px;
-}
-
-.btn-default {
-    width: 64px;
-    height: 34px;
-    border-radius: 1px;
-}
-
-.btn-cancel {
-    margin-left: 12px;
-    background-color: #ccc;
-}
-
-.btn-cancel:hover, .btn-cancel:active {
-    background-color: #bbb;
-}
-
-.btn-picker {
-    margin: 70px 139px 0;
-}
-
-.picker-note {
-    margin-top: 8px;
-    color: #bbb;
-    font-size: 13px;
-    text-align: center;
-}
-
 .trans {
     background-color: rgba(0, 0, 0, 0.9);
 }
@@ -346,7 +307,7 @@
 .trans-nav {
     position: absolute;
     top: 35%;
-    width: 180px;
+    width: 100px;
     height: 120px;
     cursor: pointer;
 }
@@ -372,12 +333,12 @@
 }
 
 .arrow-prev {
-    left: 5px;
+    left: 15px;
     background: url("../images/icon/return.png") no-repeat center;
 }
 
 .arrow-next {
-    right: 5px;
+    right: 15px;
     background: url("../images/icon/enter.png") no-repeat center;
 }
 
@@ -434,6 +395,14 @@
     }
 }
 
+.icon-trash:before {
+    content: "\e020";
+}
+
+.icon-bookmark:before {
+    content: "\e044"
+}
+
 .icon-edit:before {
     content: "\e065";
 }
@@ -443,6 +412,72 @@ input[type="file"].form-control {
     padding: 8px 12px;
 }
 
-.form-label {
-    margin-left: 10px;
+.book-cog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 70px;
+    color: #fff;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cog-menu {
+    position: absolute;
+    z-index: 99;
+    top: 465px;
+    right: 4px;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.cog-action {
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    padding: 0 20px;
+    width: 60px;
+    color: #000;
+    font-size: 14px;
+}
+
+.cog-line {
+    border-bottom: 1px solid #dedfe0;
+}
+
+.cog-action .icon {
+    margin-right: 12px;
+}
+
+.modal-dialog {
+    width: 458px;
+}
+
+.modal-content {
+    padding: 32px 48px 48px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.btn-picker {
+    margin-left: 12px;
+}
+
+.middle {
+    margin-bottom: 8px;
+}
+
+.delete-prompt {
+    font-size: 24px;
+    padding: 12px 0;
+    text-align: center;
 }

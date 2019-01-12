@@ -13,13 +13,6 @@ const main = new Vue({
         }
     },
     mounted: function () {
-        axios.get(requestContext + "api/books/index")
-            .then(function (response) {
-                let statusCode = response.data.statusCode;
-                if (200 === statusCode) {
-                    main.setBookList(response.data.data);
-                }
-            });
         axios.get(requestContext + "api/authors/index")
             .then(function (response) {
                 let statusCode = response.data.statusCode;

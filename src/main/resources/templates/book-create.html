@@ -27,7 +27,7 @@
             <button class="btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
                 <span class="icon icon-link"></span>&nbsp;选择图片
             </button>
-            <button class="btn-pick-cancel" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消</button>
+            <button class="btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消</button>
         </div>
         <div class="form-group middle">
             <label class="form-label">名称</label>
@@ -62,7 +62,8 @@
             <label class="form-label">简介</label>
             <textarea class="form-area" v-model="book.description"></textarea>
         </div>
-        <button class="btn pull-right" type="button" @click="createBook" :disabled="isDisabled">{{action}}
+        <button class="btn pull-right" type="button" @click="createBook" :disabled="isDisabled">
+            <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
         </button>
     </form>
 </main>

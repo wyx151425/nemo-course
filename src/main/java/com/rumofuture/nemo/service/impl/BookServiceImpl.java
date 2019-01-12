@@ -3,6 +3,7 @@ package com.rumofuture.nemo.service.impl;
 import com.rumofuture.nemo.model.domain.Book;
 import com.rumofuture.nemo.model.domain.User;
 import com.rumofuture.nemo.repository.BookRepository;
+import com.rumofuture.nemo.repository.PageRepository;
 import com.rumofuture.nemo.repository.UserRepository;
 import com.rumofuture.nemo.service.BookService;
 import com.rumofuture.nemo.util.Constant;
@@ -25,11 +26,13 @@ public class BookServiceImpl implements BookService {
 
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final PageRepository pageRepository;
 
     @Autowired
-    public BookServiceImpl(UserRepository userRepository, BookRepository bookRepository) {
+    public BookServiceImpl(UserRepository userRepository, BookRepository bookRepository, PageRepository pageRepository) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.pageRepository = pageRepository;
     }
 
     @Override
@@ -45,6 +48,19 @@ public class BookServiceImpl implements BookService {
         int bookQuantity = user.getBook();
         user.setBook(++bookQuantity);
         userRepository.update(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateBook(Book book) {
+        bookRepository.update(book);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteBook(Integer id) {
+        bookRepository.delete(id);
+        pageRepository.deleteAllByBookId(id);
     }
 
     @Override

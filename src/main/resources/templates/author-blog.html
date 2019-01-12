@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - 微课学习平台</title>
+    <title>Rumo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/book.css"/>
@@ -13,7 +13,7 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="../index">Nemo</a>
+            <a class="logo" href="../index">Rumo</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt="头像"/>
@@ -27,7 +27,6 @@
                 </div>
             </div>
             <span class="line"></span>
-            <a class="btn-publish" href="../book/create"><span class="icon icon-plus"></span></a>
             <form class="form-search" action="">
                 <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
                 <button class="icon icon-search btn-search" type="submit"></button>
@@ -73,7 +72,7 @@
                     <p class="book-name">{{book.name}}</p>
                     <p class="book-desc">{{book.description}}</p>
                     <div class="book-style">
-                        <span class="item">{{book.style}}</span>
+                        <span class="item">{{book.style}}&nbsp;{{book.type}}</span>
                         <em class="line"></em>
                         <span class="item">章节&nbsp;{{book.page}}</span>
                         <a class="icon icon-link pull-right" :href="'../author/book?id=' + book.id"></a>

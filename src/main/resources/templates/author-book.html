@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - 微课学习平台</title>
+    <title>Rumo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/author-book.css"/>
@@ -12,7 +12,7 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="../index">Nemo</a>
+            <a class="logo" href="../index">Rumo</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
@@ -26,7 +26,6 @@
                 </div>
             </div>
             <span class="line"></span>
-            <a class="btn-publish" href="../book/create"><span class="icon icon-plus"></span></a>
             <form class="form-search" action="">
                 <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
                 <button class="icon icon-search btn-search" type="submit"></button>
@@ -39,10 +38,10 @@
         <img class="book-cover" :src="book.cover" alt=""/>
         <div class="book-wrap">
             <div class="book-info">
-                <p class="book-name">{{book.name}}<span class="icon icon-favor" :class="{'orange-favor': isFavorite}" @click="favoriteBook"></span></p>
+                <p class="book-name">{{book.name}}<span class="icon icon-star" :class="{'orange-star': isFavorite}" @click="favoriteBook"></span></p>
                 <p class="book-desc">{{book.description}}</p>
                 <p class="book-style">
-                    <span class="item">{{book.style}}&nbsp;&nbsp;&nbsp;</span>
+                    <span class="item">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;&nbsp;</span>
                     <span class="item">章节&nbsp;{{book.page}}&nbsp;&nbsp;&nbsp;</span>
                     <span class="item">收藏&nbsp;{{book.favor}}</span>
                 </p>
@@ -60,11 +59,12 @@
         </div>
     </div>
     <div class="content">
-        <div class="page" v-for="(page, index) in book.pageList" v-cloak>
-            <img class="page-image" :src="page.image"/>
-            <div class="page-info">
-                <p class="page-no"><span>{{index + 1}}</span></p>
-            </div>
+        <p class="title">课程章节</p>
+        <div class="lesson" v-for="(page, index) in book.pageList" v-cloak>
+            <p class="lesson-no">{{index + 1}}</p>
+            <p class="lesson-name">{{page.name}}</p>
+            <p class="lesson-play"></p>
+            <button class="lesson-study" type="button" @click="playVideo(index)">开始学习</button>
         </div>
     </div>
 </main>
@@ -78,16 +78,13 @@
     <div class="trans-content">
         <p class="trans-url"></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
-        <!--<img class="trans-page" :src="page.image" alt="">-->
         <video :src="page.image" class="trans-page" controls></video>
         <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
         <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>
-            <img class="trans-preview prev-right" :src="prevUrl" alt="">
         </div>
         <div class="trans-nav nav-next" title="下一张" @click="nextTrans">
             <span class="nav-arrow arrow-next"></span>
-            <img class="trans-preview next-left" :src="nextUrl" alt="">
         </div>
     </div>
 </div>

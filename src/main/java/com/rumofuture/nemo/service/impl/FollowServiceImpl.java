@@ -40,7 +40,7 @@ public class FollowServiceImpl implements FollowService {
         followRepository.save(follow);
         User author = userRepository.findUserById(follow.getAuthor().getId());
         int follower = author.getFollower();
-        author.setFollow(++follower);
+        author.setFollower(++follower);
         userRepository.update(author);
         User user = userRepository.findUserById(follow.getUser().getId());
         int followed = user.getFollow();
@@ -55,7 +55,7 @@ public class FollowServiceImpl implements FollowService {
         followRepository.delete(id);
         User author = userRepository.findUserById(follow.getAuthorId());
         int follower = author.getFollower();
-        author.setFollow(--follower);
+        author.setFollower(--follower);
         userRepository.update(author);
         User user = userRepository.findUserById(follow.getUserId());
         int followed = user.getFollow();

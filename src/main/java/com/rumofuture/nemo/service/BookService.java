@@ -20,6 +20,18 @@ public interface BookService {
     void saveBook(Book book);
 
     /**
+     * 更新漫画册
+     * @param book 漫画册数据对象
+     */
+    void updateBook(Book book);
+
+    /**
+     * 删除课程
+     * @param id 课程数据对象
+     */
+    void deleteBook(Integer id);
+
+    /**
      * 获取漫画册对象集合
      *
      * @return 漫画册对象集合

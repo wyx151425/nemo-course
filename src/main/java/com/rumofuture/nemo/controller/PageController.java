@@ -32,13 +32,13 @@ public class PageController extends NemoFacade {
         return new Response<>(page);
     }
 
-    @DeleteMapping(value = "pages/{id}")
+    @DeleteMapping(value = "lessons/{id}")
     public Response<Page> actionDeletePage(@PathVariable(value = "id") Integer id) {
         pageService.delete(id);
         return new Response<>();
     }
 
-    @PutMapping(value = "pages")
+    @PutMapping(value = "lessons")
     public Response<Page> actionUpdatePage(@RequestBody Page page) {
         pageService.update(page);
         return new Response<>();
