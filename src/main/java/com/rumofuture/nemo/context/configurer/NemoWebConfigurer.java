@@ -50,6 +50,6 @@ public class NemoWebConfigurer implements WebMvcConfigurer {
         registry.addViewController("/author/blog").setViewName("author-blog");
         registry.addViewController("/author/book").setViewName("author-book");
         registry.addViewController("/book/list").setViewName("book-list");
-        registry.addViewController("/book/create").setViewName("book-create");
+        registry.addViewController("/admin/index").setViewName("admin-index");
     }
 }

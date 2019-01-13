@@ -206,6 +206,10 @@
     content: "\e006";
 }
 
+.icon-bookmark:before {
+    content: "\e044"
+}
+
 .icon-picture:before {
     content: "\e060";
 }
@@ -214,3 +218,18 @@
     content: "\e104";
 }
 
+.book {
+    position: relative;
+}
+
+.publish-mark {
+    position: absolute;
+    top: 120px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    color: #eee;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+}

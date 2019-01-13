@@ -13,10 +13,7 @@ const main = new Vue({
             email: "",
             motto: "",
             profile: "",
-            province: "",
-            prefecture: "",
             gender: "",
-            birthday: ""
         },
         locationList: [
             {
@@ -223,6 +220,10 @@ const main = new Vue({
                         if (200 === statusCode) {
                             main.saveAvatarCallback("保存成功", true);
                             main.user.avatar = avatarUrl;
+                            let currentUser = JSON.parse(localStorage.getItem("user"));
+                            currentUser.avatar = avatarUrl;
+                            localStorage.setItem("user", JSON.stringify(currentUser));
+                            header.setUserAvatar(avatarUrl);
                         } else {
                             let message = getMessage(statusCode);
                             main.saveAvatarCallback(message, false);

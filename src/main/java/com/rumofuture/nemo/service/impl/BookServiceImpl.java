@@ -43,17 +43,25 @@ public class BookServiceImpl implements BookService {
         book.setFavor(0);
         book.setPage(0);
         bookRepository.save(book);
-
-        User user = userRepository.findUserById(book.getAuthor().getId());
-        int bookQuantity = user.getBook();
-        user.setBook(++bookQuantity);
-        userRepository.update(user);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateBook(Book book) {
         bookRepository.update(book);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void publishBook(Integer id) {
+        Book book = bookRepository.findBookById(id);
+        book.setStatus(Constant.BookStatus.PUBLISH);
+        bookRepository.update(book);
+
+        User user = book.getAuthor();
+        int bookQuantity = user.getBook();
+        user.setBook(++bookQuantity);
+        userRepository.update(user);
     }
 
     @Override
@@ -73,6 +81,12 @@ public class BookServiceImpl implements BookService {
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Book> findBookListByAuthor(Integer authorId) {
         return bookRepository.findBookListByAuthorId(authorId);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    public List<Book> findPublishedBookListByAuthor(Integer authorId) {
+        return bookRepository.findPublishedBookListByAuthorId(authorId);
     }
 
     @Override

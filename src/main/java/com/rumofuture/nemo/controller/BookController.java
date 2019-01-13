@@ -3,6 +3,7 @@ package com.rumofuture.nemo.controller;
 import com.rumofuture.nemo.model.domain.Book;
 import com.rumofuture.nemo.model.dto.Response;
 import com.rumofuture.nemo.service.BookService;
+import com.rumofuture.nemo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,12 @@ public class BookController extends NemoFacade {
     @PutMapping(value = "books")
     public Response<Book> actionUpdateBook(@RequestBody Book book) {
         bookService.updateBook(book);
+        return new Response<>();
+    }
+
+    @PutMapping(value = "books/{id}/publish")
+    public Response<Book> actionPublishBook(@PathVariable(value = "id") Integer id) {
+        bookService.publishBook(id);
         return new Response<>();
     }
 

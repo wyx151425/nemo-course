@@ -176,9 +176,9 @@ a, a:link, a:hover, a:active, a:visited, u {
 }
 
 .account-menu .account-action .icon {
-    color: #bbb;
     top: 2px;
-    margin-right: 8px;
+    margin-left: 4px;
+    margin-right: 16px;
 }
 
 .login-action {
@@ -767,16 +767,20 @@ input[type="checkbox"]:checked + span.checkbox {
     content: "\e014";
 }
 
+.icon-off:before {
+    content: "\e017"
+}
+
 .icon-cog:before {
     content: "\e019";
 }
 
-.icon-phone:before {
-    content: "\e145";
+.icon-edit:before {
+    content: "\e065";
 }
 
-.icon-log-out:before {
-    content: "\e163";
+.icon-phone:before {
+    content: "\e145";
 }
 
 .icon-menu-down:before {

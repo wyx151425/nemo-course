@@ -72,4 +72,8 @@
     <select id="findBookListByAuthorId" parameterType="int" resultType="book">
         SELECT * FROM book WHERE status > 0 AND author_id = #{authorId}
     </select>
+
+    <select id="findPublishedBookListByAuthorId" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 2 AND author_id = #{authorId}
+    </select>
 </mapper>

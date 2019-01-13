@@ -21,12 +21,21 @@ public interface BookService {
 
     /**
      * 更新漫画册
+     *
      * @param book 漫画册数据对象
      */
     void updateBook(Book book);
 
     /**
+     * 发布课程
+     *
+     * @param id 课程ID
+     */
+    void publishBook(Integer id);
+
+    /**
      * 删除课程
+     *
      * @param id 课程数据对象
      */
     void deleteBook(Integer id);
@@ -45,6 +54,14 @@ public interface BookService {
      * @return 漫画册集合
      */
     List<Book> findBookListByAuthor(Integer authorId);
+
+    /**
+     * 根据用户ID获取用户创建的漫画册集合
+     *
+     * @param authorId 用户ID
+     * @return 漫画册集合
+     */
+    List<Book> findPublishedBookListByAuthor(Integer authorId);
 
     /**
      * 根据漫画册ID获取漫画册及其包含的漫画分页

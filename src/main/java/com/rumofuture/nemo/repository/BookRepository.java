@@ -1,6 +1,7 @@
 package com.rumofuture.nemo.repository;
 
 import com.rumofuture.nemo.model.domain.Book;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -65,4 +66,12 @@ public interface BookRepository {
      * @return 漫画册对象集合
      */
     List<Book> findBookListByAuthorId(Integer authorId);
+
+    /**
+     * 根据漫画册的作者ID获取该作者的漫画册集合
+     *
+     * @param authorId 漫画册作者ID
+     * @return 漫画册对象集合
+     */
+    List<Book> findPublishedBookListByAuthorId(Integer authorId);
 }

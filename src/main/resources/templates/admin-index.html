@@ -6,7 +6,7 @@
     <title>Nemo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
-    <link rel="stylesheet" href="../css/author-list.css"/>
+    <link rel="stylesheet" href="../css/admin-index.css"/>
 </head>
 <body>
 <header id="header" class="header">
@@ -35,32 +35,43 @@
     </div>
 </header>
 <main id="main" class="container">
-    <div class="theme">
-        <a href="../author/list"></a>
-        <p>热点名师推荐</p>
-    </div>
-    <div class="content">
-        <div class="author" v-for="author in authorList">
-            <div class="author-info">
-                <img class="author-avatar" :src="author.avatar" alt=""/>
-                <p class="author-name">{{author.name}}</p>
-                <p class="author-follow">课程&nbsp;{{author.book}}&nbsp;&nbsp;·&nbsp;&nbsp;粉丝&nbsp;{{author.follower}}</p>
-                <p class="author-profile">{{author.profile}}</p>
-            </div>
-            <div class="book-list">
-                <h6 class="list-title">旗下课程</h6>
-                <div class="book" v-for="(book, index) in author.bookList" v-if="index < 2">
-                    <img class="book-cover" :src="book.cover" alt=""/>
-                    <div class="book-info">
-                        <p class="book-name">{{book.name}}</p>
-                        <p class="book-star">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;&nbsp;章节&nbsp;{{book.page}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <a class="author-link" :href="'../author/blog?id=' + author.id"></a>
+    <div class="course-panel">
+        <div class="course-item">
+            <span class="course-rank">1</span>
+        </div>
+        <div class="course-item">
+            <span class="course-rank">2</span>
+        </div>
+        <div class="course-item">
+            <span class="course-rank">3</span>
         </div>
     </div>
+    <div class="approve-panel">
+        <div class="search-space">
+            <input class="search-input" type="text" placeholder="用户邮箱或手机号"/>
+            <button class="search-btn"><span class="icon icon-search"></span></button>
+        </div>
+        <div class="candidate">
+            <div class="candidate-info">
+                <img class="candidate-avatar" src="../images/default-avatar.jpg" alt=""/>
+                <p class="candidate-item">关注 12</p>
+                <p class="candidate-item">收藏 32</p>
+            </div>
+            <p class="candidate-name">
+                <span>王振琦</span>
+                <span class="icon icon-ok-sign"></span></p>
+            <p class="candidate-motto">心事浩渺连广宇 于无声处听惊雷</p>
+            <p class="candidate-profile">
+                我是一个喜欢艺术热爱生活的小胖子
+                我的梦想是成为一名架构师 但是我还不怎么会编程
+                那就做一个艺术家吧 可是我漫画画的不好看 乐感也不好
+                还是不要做架构师了 架构师什么的都是秃头
+                也不要做艺术家了 艺术家什么的都是流氓
+                比流氓还流氓的是专家学者
+            </p>
+        </div>
+    </div>
+    <div class="author-panel"></div>
 </main>
 <footer class="footer">
     <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
@@ -71,6 +82,20 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/nemo.js"></script>
-<script src="../js/author-list.js"></script>
+<script src="../js/admin-index.js"></script>
+<script>
+    const main = new Vue({
+        el: "#main",
+        data: {
+
+        },
+        methods: {
+
+        },
+        mounted: function () {
+
+        }
+    });
+</script>
 </body>
 </html>

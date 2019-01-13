@@ -4,6 +4,7 @@ CREATE TABLE `user` (
   `status` int(1),
   `create_at` datetime,
   `update_at` datetime,
+  `role` varchar(255),
   `name` varchar(255),
   `mobile_phone_number` char(11),
   `password` varchar(32),
@@ -21,6 +22,17 @@ CREATE TABLE `user` (
   `book` int(3),
   `avatar` varchar(255),
   `portrait` varchar(255),
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_id` char(32),
+  `status` int(1),
+  `create_at` datetime,
+  `update_at` datetime,
+  `role` varchar(255),
+  `code` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 

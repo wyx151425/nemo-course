@@ -17,6 +17,10 @@ public class User extends NemoEntity {
      */
     private String role;
     /**
+     * 权限键值对
+     */
+    private Map<String, Boolean> permissions;
+    /**
      * 角色键值
      */
     private Map<String, Boolean> roles;
@@ -32,10 +36,6 @@ public class User extends NemoEntity {
      * 密码
      */
     private String password;
-    /**
-     * 权限令牌
-     */
-    private String token;
     /**
      * 状态：0-禁用用户/1-普通用户/2-普通可发布漫画用户
      * private Integer status;
@@ -53,25 +53,9 @@ public class User extends NemoEntity {
      */
     private String profile;
     /**
-     * 所在一级行政区
-     */
-    private String province;
-    /**
-     * 所在二级行政区
-     */
-    private String prefecture;
-    /**
      * 性别
      */
     private String gender;
-    /**
-     * 生日
-     */
-    private LocalDate birthday;
-    /**
-     * 年龄
-     */
-    private Integer age;
     /**
      * 关注作家数
      */
@@ -118,6 +102,14 @@ public class User extends NemoEntity {
         this.roles = roles;
     }
 
+    public Map<String, Boolean> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Map<String, Boolean> permissions) {
+        this.permissions = permissions;
+    }
+
     public String getName() {
         return name;
     }
@@ -140,14 +132,6 @@ public class User extends NemoEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getEmail() {
@@ -174,44 +158,12 @@ public class User extends NemoEntity {
         this.profile = profile;
     }
 
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getPrefecture() {
-        return prefecture;
-    }
-
-    public void setPrefecture(String prefecture) {
-        this.prefecture = prefecture;
-    }
-
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public Integer getFollow() {
@@ -278,10 +230,7 @@ public class User extends NemoEntity {
                 ", email='" + email + '\'' +
                 ", motto='" + motto + '\'' +
                 ", profile='" + profile + '\'' +
-                ", province='" + province + '\'' +
-                ", prefecture='" + prefecture + '\'' +
                 ", gender='" + gender + '\'' +
-                ", birthday=" + birthday +
                 ", follow=" + follow +
                 ", follower=" + follower +
                 ", favorite=" + favorite +

@@ -57,7 +57,7 @@ const header = new Vue({
         isVisible: false,
         timer: null,
         user: {
-            avatar: "../images/default-avatar.jpg"
+            avatar: ""
         }
     },
     methods: {
@@ -70,6 +70,9 @@ const header = new Vue({
             this.timer = setInterval(function () {
                 header.isVisible = false;
             }, 500);
+        },
+        setUserAvatar: function (avatar) {
+            this.user.avatar = avatar;
         },
         loginModalVisible: function () {
             loginForm.visible();

@@ -29,7 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public User findAuthorContainsBookList(Integer id) {
-        User user = userRepository.findUserById(id);
+        User user = userRepository.findAuthorById(id);
         user.getBookList();
         return user;
     }

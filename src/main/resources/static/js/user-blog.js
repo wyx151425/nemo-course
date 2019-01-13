@@ -9,7 +9,11 @@ const main = new Vue({
             book: 0,
             follow: 0,
             follower: 0,
-            favorite: 0
+            favorite: 0,
+            permissions: {
+                CREATE_COURSE: false,
+                OBTAIN_FOLLOWER: false
+            }
         },
         authorList: [],
         followerList: [],
@@ -79,6 +83,9 @@ const main = new Vue({
         axios.get(requestContext + "api/users/current")
             .then(function (response) {
                 main.setUser(response.data.data);
+                if (!response.data.data.permissions.CREATE_COURSE) {
+                    main.changeTab(1);
+                }
             }).catch(function () {
             popoverSpace.append("服务器访问失败", false);
         });
@@ -172,8 +179,8 @@ const bookCreateModal = new Vue({
             let file = document.getElementById("file");
             let bmobFile = new Bmob.File(file.value, file.files[0]);
             bmobFile.save().then(function (obj) {
-                bookCreateForm.book.cover = obj.url();
-                axios.post(requestContext + "api/books", bookCreateForm.book)
+                bookCreateModal.book.cover = obj.url();
+                axios.post(requestContext + "api/books", bookCreateModal.book)
                     .then(function (response) {
                         let statusCode = response.data.statusCode;
                         if (200 === statusCode) {

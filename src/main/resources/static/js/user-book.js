@@ -38,6 +38,9 @@ const main = new Vue({
         setBook: function (book) {
             this.book = book;
         },
+        getBook: function () {
+            return this.book;
+        },
         getBookId: function () {
             return this.book.id;
         },
@@ -52,6 +55,9 @@ const main = new Vue({
         },
         uploadModalVisible: function () {
             uploadModal.visible();
+        },
+        publishModalVisible: function () {
+            publishModal.visible();
         },
         updateBookModalVisible: function () {
             bookUpdateModal.visible(this.book);
@@ -189,6 +195,48 @@ const uploadModal = new Vue({
                 document.getElementById("file").value = "";
             }
             this.isDisabled = false;
+        }
+    }
+});
+
+const publishModal = new Vue({
+    el: "#publishModal",
+    data: {
+        isVisible: false,
+        isDisabled: false,
+        action: "发布"
+    },
+    methods: {
+        visible: function () {
+            this.isVisible = true;
+        },
+        invisible: function () {
+            this.isVisible = false;
+        },
+        publishBook: function () {
+            this.isDisabled = true;
+            this.action = "正在发布";
+            let url = requestContext + "api/books/" + main.getBookId() + "/publish";
+            axios.put(url)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    if (200 === statusCode) {
+                        publishModal.publishResult("发布成功", true);
+                    } else {
+                        publishModal.publishResult("发布失败", false);
+                    }
+                }).catch(function () {
+                publishModal.publishResult("服务器访问失败", false);
+            });
+        },
+        publishResult: function (message, success) {
+            popoverSpace.append(message, success);
+            this.isDisabled = false;
+            this.action = "发布";
+            if (success) {
+                main.getBook().status = 2;
+                publishModal.invisible();
+            }
         }
     }
 });

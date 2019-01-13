@@ -17,28 +17,6 @@ public class Constant {
     public static final String PAGE_LIST = "pageList";
     public static final String RESPONSE = "response";
 
-    public static class AppType {
-        public static final String WEB = "Web";
-        public static final String ANDROID = "Android";
-        public static final String IOS = "iOS";
-    }
-
-    public static class RequestHeader {
-        public static final String DEVICE_ID = "deviceId";
-        public static final String VERSION = "version";
-        public static final String LANGUAGE = "language";
-        public static final String APP_TYPE = "appType";
-    }
-
-    public static class Language {
-        public static final String CHINESE = "Chinese";
-        public static final String ENGLISH = "English";
-    }
-
-    public static class Cache {
-        public static final String SEPARATOR = ":";
-    }
-
     public static class PageModel {
         public static class Limit {
             public static final int USER = 32;
@@ -67,12 +45,24 @@ public class Constant {
     public static class BookStatus {
         public static final int DELETED = 0;
         public static final int CREATED = 1;
-        public static final int UPDATED = 2;
-        public static final int PUBLISH = 3;
+        public static final int PUBLISH = 2;
     }
 
     public static class Status {
         public static final int DELETED = 0;
         public static final int GENERAL = 1;
+    }
+
+    public static class Roles {
+        public static final String USER = "USER";
+        public static final String LECTURER = "LECTURER";
+        public static final String ADMINISTRATOR = "ADMINISTRATOR";
+    }
+
+    public static class Permissions {
+        public static final String COMMON = "COMMON";
+        public static final String CREATE_COURSE = "CREATE_COURSE";
+        public static final String OBTAIN_FOLLOWER = "OBTAIN_FOLLOWER";
+        public static final String APPROVE_APPLICATION = "APPROVE_APPLICATION";
     }
 }

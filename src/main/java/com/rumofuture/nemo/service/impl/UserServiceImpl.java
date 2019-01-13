@@ -1,8 +1,10 @@
 package com.rumofuture.nemo.service.impl;
 
 import com.rumofuture.nemo.context.exception.NemoException;
+import com.rumofuture.nemo.model.domain.Permission;
 import com.rumofuture.nemo.model.domain.User;
 import com.rumofuture.nemo.model.dto.UserPwd;
+import com.rumofuture.nemo.repository.PermissionRepository;
 import com.rumofuture.nemo.repository.UserRepository;
 import com.rumofuture.nemo.service.UserService;
 import com.rumofuture.nemo.util.Constant;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户业务逻辑类
@@ -25,10 +30,12 @@ import java.time.LocalDate;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PermissionRepository permissionRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PermissionRepository permissionRepository) {
         this.userRepository = userRepository;
+        this.permissionRepository = permissionRepository;
     }
 
     @Override
@@ -42,6 +49,12 @@ public class UserServiceImpl implements UserService {
                 throw new NemoException(StatusCode.USER_DISABLED);
             } else {
                 if (targetUser.getPassword().equals(user.getPassword())) {
+                    List<Permission> permissionList = permissionRepository.findAllByRole(targetUser.getRole());
+                    Map<String, Boolean> permissions = new HashMap<>();
+                    for (Permission permission : permissionList) {
+                        permissions.put(permission.getCode(), true);
+                    }
+                    targetUser.setPermissions(permissions);
                     return targetUser;
                 } else {
                     throw new NemoException(StatusCode.USER_PASSWORD_ERROR);
@@ -60,12 +73,11 @@ public class UserServiceImpl implements UserService {
             user.setAvatar("../images/default-avatar.jpg");
             user.setPortrait("../images/default-portrait.jpg");
             user.setGender("保密");
-            user.setBirthday(LocalDate.now());
-            user.setAge(0);
             user.setFollow(0);
             user.setFollower(0);
             user.setFavorite(0);
             user.setBook(0);
+            user.setRole(Constant.Roles.USER);
             userRepository.save(user);
             return user;
         } else {
@@ -129,6 +141,12 @@ public class UserServiceImpl implements UserService {
     public User findUserContainsBookList(Integer id) {
         User user = userRepository.findUserById(id);
         user.getBookList();
+        List<Permission> permissionList = permissionRepository.findAllByRole(user.getRole());
+        Map<String, Boolean> permissions = new HashMap<>();
+        for (Permission permission : permissionList) {
+            permissions.put(permission.getCode(), true);
+        }
+        user.setPermissions(permissions);
         return user;
     }
 }
