@@ -108,12 +108,14 @@ const main = new Vue({
         axios.get(requestContext + "api/books/" + id)
             .then(function (response) {
                 main.setBook(response.data.data);
-                axios.get(requestContext + "api/favorites?bookId=" + id + "&userId=" + user.id)
-                    .then(function (response) {
-                        if (null !== response.data.data) {
-                            main.favoriteCallback(response.data.data);
-                        }
-                    });
+                if (null != user) {
+                    axios.get(requestContext + "api/favorites?bookId=" + id + "&userId=" + user.id)
+                        .then(function (response) {
+                            if (null !== response.data.data) {
+                                main.favoriteCallback(response.data.data);
+                            }
+                        });
+                }
             }).catch(function () {
             popoverSpace.append("服务器访问失败", false);
         });
@@ -159,74 +161,6 @@ const transModal = new Vue({
                 this.index++;
                 this.page = this.pageList[this.index];
             }
-        }
-    }
-});
-
-const uploadModal = new Vue({
-    el: "#uploadModal",
-    data: {
-        image: "",
-        isChosen: false,
-        isVisible: false,
-        action: "上传",
-        isDisabled: false
-    },
-    methods: {
-        visible: function () {
-            this.isChosen = false;
-            this.isVisible = true;
-        },
-        invisible: function () {
-            this.image = "";
-            this.isVisible = false;
-        },
-        choosePage: function () {
-            document.getElementById("file").click();
-        },
-        changePage: function () {
-            this.isChosen = true;
-            this.image = getFileNativeUrl(document.getElementById("file").files[0]);
-        },
-        cancelChoice: function () {
-            this.isChosen = false;
-            document.getElementById("file").value = "";
-        },
-        uploadPage: function () {
-            this.isDisabled = true;
-            this.action = "正在上传";
-            Bmob.initialize("75b6a15a8791635241707418e52dcb90", "cf34d2d2b2c325fcf58079c3063526f4");
-            let file = document.getElementById("file");
-            let bmobFile = new Bmob.File(file.value, file.files[0]);
-            bmobFile.save().then(function (obj) {
-                axios.post(requestContext + "api/pages", {
-                    book: {id: main.getBookId()},
-                    image: obj.url()
-                }).then(function (response) {
-                    let statusCode = response.data.statusCode;
-                    if (200 === statusCode) {
-                        main.addPage(response.data.data);
-                        uploadModal.uploadCallback("添加成功", true);
-                        uploadModal.invisible();
-                    } else {
-                        uploadModal.uploadCallback("添加失败", false);
-                    }
-                }).catch(function () {
-                    uploadModal.uploadCallback("系统错误", false);
-                });
-            }, function () {
-                uploadModal.uploadCallback("添加失败", false);
-            });
-        },
-        uploadCallback: function (message, isSuccess) {
-            popoverSpace.append(message, isSuccess);
-            this.action = "上传";
-            if (isSuccess) {
-                this.image = "";
-                this.oldUrl = "";
-                this.isChosen = false;
-            }
-            this.isDisabled = false;
         }
     }
 });

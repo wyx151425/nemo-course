@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rumofuture.nemo.repository.FollowRepository">
+<mapper namespace="cn.edu.qfnu.rumo.repository.FollowRepository">
 
     <insert id="save" parameterType="follow" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO follow(object_id, status, create_at, update_at, author_id, user_id)

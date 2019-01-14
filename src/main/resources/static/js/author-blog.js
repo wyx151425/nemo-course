@@ -68,16 +68,19 @@ const main = new Vue({
                 let statusCode = response.data.statusCode;
                 if (200 === statusCode) {
                     main.setAuthor(response.data.data);
-                    axios.get(requestContext + "api/follows?authorId=" + id + "&userId=" + user.id)
-                        .then(function (response) {
-                            if (null !== response.data.data) {
-                                main.followCallback(response.data.data);
-                            }
-                        });
+                    if (null != user) {
+                        axios.get(requestContext + "api/follows?authorId=" + id + "&userId=" + user.id)
+                            .then(function (response) {
+                                if (null !== response.data.data) {
+                                    main.followCallback(response.data.data);
+                                }
+                            });
+                    }
                 } else {
                     popoverSpace.append("漫画家获取失败", false);
                 }
-            }).catch(function () {
+            }).catch(function (error) {
+            console.log(error);
             popoverSpace.append("服务器访问失败", false);
         });
     }

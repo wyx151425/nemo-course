@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rumofuture.nemo.repository.PageRepository">
+<mapper namespace="cn.edu.qfnu.rumo.repository.PageRepository">
 
-    <resultMap id="pageMap" type="com.rumofuture.nemo.model.domain.Page">
+    <resultMap id="pageMap" type="cn.edu.qfnu.rumo.model.domain.Page">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="image" property="image"/>
         <!-- 多对一关联映射：association -->
-        <association property="book" javaType="com.rumofuture.nemo.model.domain.Book"
-                     select="com.rumofuture.nemo.repository.BookRepository.findBookById"
+        <association property="book" javaType="cn.edu.qfnu.rumo.model.domain.Book"
+                     select="cn.edu.qfnu.rumo.repository.BookRepository.findBookById"
                      column="book_id" fetchType="lazy">
             <id column="id" property="id"/>
             <result column="name" property="name"/>

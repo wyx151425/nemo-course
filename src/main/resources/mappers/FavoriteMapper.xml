@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rumofuture.nemo.repository.FavoriteRepository">
+<mapper namespace="cn.edu.qfnu.rumo.repository.FavoriteRepository">
 
     <insert id="save" parameterType="favorite" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO favorite(object_id, status, create_at, update_at, book_id, user_id)

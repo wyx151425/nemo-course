@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rumofuture.nemo.repository.UserRepository">
+<mapper namespace="cn.edu.qfnu.rumo.repository.UserRepository">
 
-    <resultMap id="userMap" type="com.rumofuture.nemo.model.domain.User">
+    <resultMap id="userMap" type="cn.edu.qfnu.rumo.model.domain.User">
         <id column="id" property="id"/>
         <collection column="id" property="bookList" fetchType="lazy"
-                    javaType="ArrayList" ofType="com.rumofuture.nemo.model.domain.Book"
-                    select="com.rumofuture.nemo.repository.BookRepository.findBookListByAuthorId">
+                    javaType="ArrayList" ofType="cn.edu.qfnu.rumo.model.domain.Book"
+                    select="cn.edu.qfnu.rumo.repository.BookRepository.findBookListByAuthorId">
             <id property="id" column="id"/>
             <result column="cover" property="cover"/>
             <result column="name" property="name"/>
@@ -18,7 +18,7 @@
         </collection>
     </resultMap>
 
-    <resultMap id="authorMap" type="com.rumofuture.nemo.model.domain.User">
+    <resultMap id="authorMap" type="cn.edu.qfnu.rumo.model.domain.User">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="motto" property="motto"/>
@@ -31,8 +31,8 @@
         <result column="avatar" property="avatar"/>
         <result column="portrait" property="portrait"/>
         <collection column="id" property="bookList" fetchType="lazy"
-                    javaType="ArrayList" ofType="com.rumofuture.nemo.model.domain.Book"
-                    select="com.rumofuture.nemo.repository.BookRepository.findPublishedBookListByAuthorId">
+                    javaType="ArrayList" ofType="cn.edu.qfnu.rumo.model.domain.Book"
+                    select="cn.edu.qfnu.rumo.repository.BookRepository.findPublishedBookListByAuthorId">
             <id property="id" column="id"/>
             <result column="cover" property="cover"/>
             <result column="name" property="name"/>
@@ -82,6 +82,11 @@
         SELECT * FROM user WHERE mobile_phone_number = #{mobilePhoneNumber}
     </select>
 
+    <!-- 根据邮箱查询用户 -->
+    <select id="findUserByEmail" parameterType="string" resultType="user">
+        SELECT * FROM user WHERE email = #{email}
+    </select>
+
     <select id="findAuthorById" parameterType="int" resultMap="authorMap">
         SELECT id, name, motto, profile, gender, follow, follower, favorite, book, avatar, portrait FROM user WHERE status = 2 AND id = #{id}
     </select>
@@ -94,5 +99,10 @@
     <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
     <select id="findAuthorListWithLimit" parameterType="int" resultMap="authorMap">
         SELECT id, name, motto, profile, gender, follow, follower, favorite, book, avatar, portrait FROM user WHERE status = 2 LIMIT 0, #{limit}
+    </select>
+
+    <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
+    <select id="findAuthorListDescByFollowerWithLimit" parameterType="int" resultMap="authorMap">
+        SELECT * FROM user WHERE status = 2 ORDER BY follower DESC LIMIT #{index}, #{limit}
     </select>
 </mapper>

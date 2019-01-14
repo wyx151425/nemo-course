@@ -101,7 +101,7 @@ const transModal = new Vue({
         index: 0,
         page: {},
         pageList: [],
-        bookName: ""
+        book: {}
     },
     methods: {
         visible: function (index) {
@@ -110,7 +110,7 @@ const transModal = new Vue({
             } else {
                 this.index = 0;
             }
-            this.bookName = main.getBookName();
+            this.book = main.getBook();
             this.pageList = main.getPageList();
             if (this.pageList.length > 0) {
                 this.page = this.pageList[this.index];
@@ -214,6 +214,10 @@ const publishModal = new Vue({
             this.isVisible = false;
         },
         publishBook: function () {
+            if (0 === main.getBook().page) {
+                popoverSpace.append("请先添加课程章节", false);
+                return;
+            }
             this.isDisabled = true;
             this.action = "正在发布";
             let url = requestContext + "api/books/" + main.getBookId() + "/publish";

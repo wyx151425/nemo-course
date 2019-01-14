@@ -83,7 +83,7 @@ const header = new Vue({
                     let statusCode = response.data.statusCode;
                     if (200 === statusCode || 1003 === statusCode) {
                         localStorage.removeItem("user");
-                        window.location.href = requestContext + "index";
+                        window.location.reload();
                     }
                 }).catch(function () {
                 popoverSpace.append("服务器访问失败", false);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rumofuture.nemo.repository.BookRepository">
+<mapper namespace="cn.edu.qfnu.rumo.repository.BookRepository">
 
-    <resultMap id="bookMap" type="com.rumofuture.nemo.model.domain.Book">
+    <resultMap id="bookMap" type="cn.edu.qfnu.rumo.model.domain.Book">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="style" property="style"/>
@@ -13,13 +13,13 @@
         <result column="page" property="page"/>
         <result column="favor" property="favor"/>
         <association column="author_id" property="author" fetchType="lazy"
-                     javaType="com.rumofuture.nemo.model.domain.User"
-                     select="com.rumofuture.nemo.repository.UserRepository.findUserById">
+                     javaType="cn.edu.qfnu.rumo.model.domain.User"
+                     select="cn.edu.qfnu.rumo.repository.UserRepository.findUserById">
             <id column="id" property="id"/>
         </association>
         <collection column="id" property="pageList" fetchType="lazy"
-                    javaType="ArrayList" ofType="com.rumofuture.nemo.model.domain.Page"
-                    select="com.rumofuture.nemo.repository.PageRepository.findPageListByBookId">
+                    javaType="ArrayList" ofType="cn.edu.qfnu.rumo.model.domain.Page"
+                    select="cn.edu.qfnu.rumo.repository.PageRepository.findPageListByBookId">
             <id property="id" column="id"/>
         </collection>
     </resultMap>
@@ -65,8 +65,8 @@
     </select>
 
     <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
-    <select id="findBookListWithLimit" parameterType="int" resultType="book">
-        SELECT * FROM book WHERE status > 0 LIMIT 0, #{limit}
+    <select id="findBookListDescByFavorWithLimit" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 2 ORDER BY favor DESC LIMIT #{index}, #{limit}
     </select>
 
     <select id="findBookListByAuthorId" parameterType="int" resultType="book">

@@ -173,6 +173,7 @@ a, a:link, a:hover, a:active, a:visited, u {
 
 .account-menu .logout {
     margin: 8px 0;
+    cursor: pointer;
 }
 
 .account-menu .account-action .icon {
@@ -647,7 +648,6 @@ input[type="checkbox"]:checked + span.checkbox {
     top: 0;
     right: 16px;
     width: 280px;
-    height: 100%;
 }
 
 .popover {
