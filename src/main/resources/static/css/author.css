@@ -82,7 +82,7 @@
 
 .author-follow .item {
     float: left;
-    color: #999;
+    color: #888;
     font-size: 12px;
     margin-right: 11px;
 }
@@ -93,7 +93,7 @@
     width: 1px;
     height: 12px;
     font-style: normal;
-    margin-top: 5px;
+    margin-top: 4px;
     margin-right: 11px;
     background: #999;
 }

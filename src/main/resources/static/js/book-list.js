@@ -56,5 +56,11 @@ const main = new Vue({
                 popoverSpace.append("服务器访问失败", false);
             });
         }
+    },
+    mounted: function () {
+        let url = window.location;
+        let grade = getUrlParam(url, "grade");
+        let styleIndex = grade - 1001;
+        this.selectStyle(this.typeArray[styleIndex].style);
     }
 });

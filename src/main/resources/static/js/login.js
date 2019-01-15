@@ -17,6 +17,9 @@ const loginForm = new Vue({
         invisible: function () {
             this.isVisible = false;
         },
+        visibility: function () {
+            return this.isVisible;
+        },
         removeMobilePhoneNumber: function () {
             this.user.mobilePhoneNumber = '';
         },
@@ -52,7 +55,11 @@ const loginForm = new Vue({
                     let statusCode = response.data.statusCode;
                     if (200 === statusCode) {
                         localStorage.setItem("user", JSON.stringify(response.data.data));
-                        window.location.href = "../index";
+                        if (loginForm.visibility()) {
+                            window.location.reload();
+                        } else {
+                            window.location.href = "../index";
+                        }
                     } else {
                         let message = getMessage(statusCode);
                         loginForm.loginResult(message, false);

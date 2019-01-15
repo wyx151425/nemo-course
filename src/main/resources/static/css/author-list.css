@@ -195,6 +195,28 @@ main.container {
     height: 350px;
 }
 
+
+.btn-login {
+    margin-top: 8px;
+    height: 45px;
+}
+
+.modal-content {
+    padding: 40px 80px;
+}
+
+.icon-lock:before {
+    content: "\e033";
+}
+
+.icon-remove-sign:before {
+    content: "\e083";
+}
+
+.icon-eye-open:before {
+    content: "\e105";
+}
+
 .icon {
     top: 2px;
 }

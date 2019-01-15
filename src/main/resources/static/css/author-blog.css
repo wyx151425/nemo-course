@@ -155,85 +155,30 @@ main.container {
 }
 
 .book-list {
-    /*width: 1230px;*/
     width: 1220px;
 }
 
-/*.book {*/
-    /*display: inline-block;*/
-    /*width: 380px;*/
-    /*height: 480px;*/
-    /*margin: 0 26px 40px 0;*/
-    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);*/
-/*}*/
 
-/*.book-cover {*/
-    /*display: block;*/
-    /*width: 380px;*/
-    /*height: 240px;*/
-    /*object-fit: cover;*/
-/*}*/
+.btn-login {
+    margin-top: 8px;
+    height: 45px;
+}
 
-/*.book-info {*/
-    /*position: relative;*/
-    /*width: 380px;*/
-    /*height: 240px;*/
-    /*text-align: left;*/
-    /*padding: 36px;*/
-    /*margin-bottom: 24px;*/
-    /*box-sizing: border-box;*/
-    /*background: #fff;*/
-/*}*/
+.modal-content {
+    padding: 40px 80px;
+}
 
-/*.book-name {*/
-    /*color: #000;*/
-    /*font-size: 18px;*/
-    /*font-weight: 700;*/
-    /*margin-bottom: 12px;*/
-    /*word-break: break-word;*/
-    /*text-overflow: ellipsis;*/
-    /*overflow: hidden;*/
-    /*white-space: nowrap;*/
-/*}*/
+.icon-lock:before {
+    content: "\e033";
+}
 
-/*.book-desc {*/
-    /*height: 72px;*/
-    /*line-height: 24px;*/
-    /*color: #444;*/
-    /*font-size: 14px;*/
-    /*margin-bottom: 32px;*/
-    /*word-break: break-word;*/
-    /*overflow: hidden;*/
-    /*display: -webkit-box;*/
-    /*-webkit-line-clamp: 3;*/
-    /*-webkit-box-orient: vertical;*/
-/*}*/
+.icon-remove-sign:before {
+    content: "\e083";
+}
 
-/*.book-star {*/
-    /*position: absolute;*/
-    /*bottom: 40px;*/
-    /*width: 308px;*/
-    /*height: 24px;*/
-    /*line-height: 24px;*/
-/*}*/
-
-/*.book-star .item {*/
-    /*float: left;*/
-    /*color: #999;*/
-    /*font-size: 13px;*/
-    /*margin-right: 16px;*/
-/*}*/
-
-/*.book-star .line {*/
-    /*float: left;*/
-    /*display: block;*/
-    /*width: 1px;*/
-    /*height: 12px;*/
-    /*font-style: normal;*/
-    /*margin-top: 6px;*/
-    /*margin-right: 16px;*/
-    /*background: #dedfe0;*/
-/*}*/
+.icon-eye-open:before {
+    content: "\e105";
+}
 
 .icon {
     top: 2px;

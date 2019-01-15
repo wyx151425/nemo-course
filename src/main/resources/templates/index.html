@@ -77,22 +77,22 @@
         <div class="panel">
             <h3 class="panel-title">课程分类</h3>
             <div class="panel-item album-list">
-                <a class="album" href="">高三</a>
-                <a class="album" href="">高二</a>
-                <a class="album" href="">高一</a>
+                <a class="album" href="../book/list?grade=1001">高三</a>
+                <a class="album" href="../book/list?grade=1002">高二</a>
+                <a class="album" href="../book/list?grade=1003">高一</a>
             </div>
             <div class="panel-item album-list">
-                <a class="album" href="">初三</a>
-                <a class="album" href="">初二</a>
-                <a class="album" href="">初一</a>
+                <a class="album" href="../book/list?grade=1004">初三</a>
+                <a class="album" href="../book/list?grade=1005">初二</a>
+                <a class="album" href="../book/list?grade=1006">初一</a>
             </div>
             <div class="panel-item album-list">
-                <a class="album" href="">六年级</a>
-                <a class="album" href="">五年级</a>
-                <a class="album" href="">四年级</a>
-                <a class="album" href="">三年级</a>
-                <a class="album" href="">二年级</a>
-                <a class="album" href="">一年级</a>
+                <a class="album" href="../book/list?grade=1007">六年级</a>
+                <a class="album" href="../book/list?grade=1008">五年级</a>
+                <a class="album" href="../book/list?grade=1009">四年级</a>
+                <a class="album" href="../book/list?grade=10010">三年级</a>
+                <a class="album" href="../book/list?grade=10011">二年级</a>
+                <a class="album" href="../book/list?grade=10012">一年级</a>
             </div>
         </div>
         <div class="app">
@@ -119,7 +119,7 @@
                 <a class="row-link" href="../author/list">更多名师<span class="icon icon-menu-right"></span></a>
             </div>
             <div class="list">
-                <div v-for="author in authorList" class="author">
+                <div v-for="author in authorList" class="author" v-cloak>
                     <img class="author-portrait" :src="author.portrait" alt=""/>
                     <img class="author-avatar" :src="author.avatar" alt="">
                     <p class="author-name">{{author.name}}</p>
