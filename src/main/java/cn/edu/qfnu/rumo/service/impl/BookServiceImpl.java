@@ -8,6 +8,7 @@ import cn.edu.qfnu.rumo.repository.PageRepository;
 import cn.edu.qfnu.rumo.service.BookService;
 import cn.edu.qfnu.rumo.util.Constant;
 import cn.edu.qfnu.rumo.util.Generator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,5 +103,11 @@ public class BookServiceImpl implements BookService {
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Book> findBookListByRank(int index) {
         return bookRepository.findBookListDescByFavorWithLimit(index, 8);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    public List<Book> findBookListByStyleAndType(String style, String type) {
+        return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, style, type);
     }
 }

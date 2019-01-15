@@ -23,6 +23,8 @@ const main = new Vue({
                     if (200 === statusCode) {
                         main.followCallback(response.data.data);
                         popoverSpace.append("关注成功", true);
+                    } else if (1003 === statusCode) {
+                        popoverSpace.append("登录Rumo 关注该讲师", true);
                     } else {
                         popoverSpace.append("关注失败", false);
                     }

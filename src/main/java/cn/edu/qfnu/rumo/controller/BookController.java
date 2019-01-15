@@ -68,4 +68,13 @@ public class BookController extends RumoFacade {
         List<Book> bookList = bookService.findBookListByRank(index);
         return new Response<>(bookList);
     }
+
+    @GetMapping(value = "courses")
+    public Response<List<Book>> actionQueryCourseListByStyleAndType(
+            @RequestParam(value = "style") String style,
+            @RequestParam(value = "type") String type
+    ) {
+        List<Book> bookList = bookService.findBookListByStyleAndType(style, type);
+        return new Response<>(bookList);
+    }
 }

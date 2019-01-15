@@ -75,4 +75,20 @@ public interface BookRepository {
      * @return 漫画册对象集合
      */
     List<Book> findPublishedBookListByAuthorId(Integer authorId);
+
+    /**
+     * 根据年级和科目获取课程数据
+     *
+     * @param index 分页索引
+     * @param limit 分页数据限制
+     * @param style 年级
+     * @param type  科目
+     * @return 课程数据集合
+     */
+    List<Book> findBookListByStyleAndTypeWithLimit(
+            @Param(value = "index") int index,
+            @Param(value = "limit") int limit,
+            @Param(value = "style") String style,
+            @Param(value = "type") String type
+    );
 }

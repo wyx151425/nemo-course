@@ -32,6 +32,7 @@ public class RumoInterceptor implements HandlerInterceptor {
     private static final String API_BOOK_LIST = "%s/api/books";
     private static final String API_AUTHOR = "%s/api/authors";
     private static final String API_BOOK = "%s/api/books";
+    private static final String API_COURSE = "%s/api/courses";
     private static final String PAGE_DEFAULT = "%s/";
     private static final String PAGE_INDEX = "%s/index";
     private static final String PAGE_BOOK_LIST = "%s/book/list";
@@ -56,19 +57,20 @@ public class RumoInterceptor implements HandlerInterceptor {
         /* 2.非拦截路由 检查 */
         if (contextPath.equals(uri)
                 || String.format(PAGE_DEFAULT, contextPath).equals(uri)
-                || String.format(PAGE_INDEX, contextPath).equals(uri)) {
-            return true;
-        }
-        if (String.format(PAGE_BOOK_LIST, contextPath).equals(uri)
+                || String.format(PAGE_INDEX, contextPath).equals(uri)
+                || String.format(PAGE_BOOK_LIST, contextPath).equals(uri)
                 || String.format(PAGE_AUTHOR_BLOG, contextPath).equals(uri)
                 || String.format(PAGE_AUTHOR_BOOK, contextPath).equals(uri)
-                || String.format(PAGE_AUTHOR_LIST, contextPath).equals(uri)
-                || String.format(API_USER_LOGIN, contextPath).equals(uri)
+                || String.format(PAGE_AUTHOR_LIST, contextPath).equals(uri)) {
+            return true;
+        }
+        if (String.format(API_USER_LOGIN, contextPath).equals(uri)
                 || String.format(API_USER_REGISTER, contextPath).equals(uri)
                 || String.format(API_INDEX_AUTHOR, contextPath).equals(uri)
                 || String.format(API_BOOK_LIST, contextPath).equals(uri)
                 || uri.contains(String.format(API_AUTHOR, contextPath))
-                || uri.contains(String.format(API_BOOK, contextPath))) {
+                || uri.contains(String.format(API_BOOK, contextPath))
+                || uri.contains(String.format(API_COURSE, contextPath))) {
             if (null == request.getHeader(Constant.Request.Header.REFERER)) {
                 ObjectMapper om = new ObjectMapper();
                 PrintWriter out = response.getWriter();

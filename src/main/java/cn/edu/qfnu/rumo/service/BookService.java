@@ -78,4 +78,13 @@ public interface BookService {
      * @return 课程数据集合
      */
     List<Book> findBookListByRank(int index);
+
+    /**
+     * 根据年级和科目获取课程数据
+     *
+     * @param style 年级
+     * @param type  科目
+     * @return 课程数据集合
+     */
+    List<Book> findBookListByStyleAndType(String style, String type);
 }

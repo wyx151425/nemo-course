@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - 微课学习平台</title>
+    <title>Rumo - 微课学习平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/book.css">
@@ -64,18 +64,45 @@
     </div>
 </header>
 <main id="main" class="container">
-    <div class="theme">
-        <a href="../book/list"></a>
-        <p>热点课程推荐</p>
+    <div class="panel">
+        <div class="style-line style-deliver-line">
+            <p class="style-name">年级</p>
+            <ul class="style-list">
+                <li class="style-item style-item-2" :class="{'style-active': '高三' == style}" @click="selectStyle('高三')">高三</li>
+                <li class="style-item style-item-2" :class="{'style-active': '高二' == style}" @click="selectStyle('高二')">高二</li>
+                <li class="style-item style-item-2" :class="{'style-active': '高一' == style}" @click="selectStyle('高一')">高一</li>
+            </ul>
+            <p class="style-item-line"></p>
+            <ul class="style-list">
+                <li class="style-item style-item-2" :class="{'style-active': '初三' == style}" @click="selectStyle('初三')">初三</li>
+                <li class="style-item style-item-2" :class="{'style-active': '初二' == style}" @click="selectStyle('初二')">初二</li>
+                <li class="style-item style-item-2" :class="{'style-active': '初一' == style}" @click="selectStyle('初一')">初一</li>
+            </ul>
+            <p class="style-item-line"></p>
+            <ul class="style-list">
+                <li class="style-item style-item-3" :class="{'style-active': '六年级' == style}" @click="selectStyle('六年级')">六年级</li>
+                <li class="style-item style-item-3" :class="{'style-active': '五年级' == style}" @click="selectStyle('五年级')">五年级</li>
+                <li class="style-item style-item-3" :class="{'style-active': '四年级' == style}" @click="selectStyle('四年级')">四年级</li>
+                <li class="style-item style-item-3" :class="{'style-active': '三年级' == style}" @click="selectStyle('三年级')">三年级</li>
+                <li class="style-item style-item-3" :class="{'style-active': '二年级' == style}" @click="selectStyle('二年级')">二年级</li>
+                <li class="style-item style-item-3" :class="{'style-active': '一年级' == style}" @click="selectStyle('一年级')">一年级</li>
+            </ul>
+        </div>
+        <div class="style-line">
+            <p class="style-name">学科</p>
+            <ul class="style-list">
+                <li class="style-item style-item-2" :class="{'style-active': typeIndex == index}" v-for="(type, index) in typeList" @click="selectType(index, type)" v-cloak>{{type}}</li>
+            </ul>
+        </div>
     </div>
     <div class="content">
-        <div class="book" v-for="book in bookList">
+        <div class="book" v-for="book in bookList" v-cloak>
             <img class="book-cover" :src="book.cover" alt="">
             <div class="book-info">
                 <p class="book-name">{{book.name}}</p>
                 <p class="book-desc">{{book.description}}</p>
                 <div class="book-style">
-                    <span class="item">{{book.style}}</span>
+                    <span class="item">{{book.style}}&nbsp;{{book.type}}</span>
                     <em class="line"></em>
                     <span class="item">章节&nbsp;{{book.page}}</span>
                     <a class="icon icon-link pull-right" :href="'../author/book?id=' + book.id"></a>

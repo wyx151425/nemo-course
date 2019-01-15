@@ -67,6 +67,8 @@ const main = new Vue({
                     if (200 === statusCode) {
                         main.favoriteCallback(response.data.data);
                         popoverSpace.append("收藏成功", true);
+                    } else if (1003 === statusCode) {
+                        popoverSpace.append("登录Rumo 收藏该课程", true);
                     } else {
                         popoverSpace.append("收藏失败", false);
                     }
