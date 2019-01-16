@@ -55,6 +55,7 @@
         UPDATE user
         <set>
             <if test="status != null">status = #{status},</if>
+            <if test="role != null">role = #{role},</if>
             <if test="name != null">name = #{name},</if>
             <if test="password != null">password = #{password},</if>
             <if test="email != null">email = #{email},</if>

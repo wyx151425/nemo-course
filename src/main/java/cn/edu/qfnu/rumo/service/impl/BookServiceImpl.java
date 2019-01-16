@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
     @Transactional(rollbackFor = Exception.class)
     public void publishBook(Integer id) {
         Book book = bookRepository.findBookById(id);
-        book.setStatus(Constant.BookStatus.PUBLISH);
+        book.setPublish(true);
         bookRepository.update(book);
 
         User user = book.getAuthor();

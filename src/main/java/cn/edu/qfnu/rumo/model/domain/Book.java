@@ -46,6 +46,10 @@ public class Book extends RumoEntity {
      * 收藏此漫画的用户数
      */
     private Integer favor;
+    /**
+     * 发布标识
+     */
+    private Boolean publish;
 
     private List<Page> pageList;
 
@@ -122,6 +126,14 @@ public class Book extends RumoEntity {
 
     public void setFavor(Integer favor) {
         this.favor = favor;
+    }
+
+    public Boolean getPublish() {
+        return publish;
+    }
+
+    public void setPublish(Boolean publish) {
+        this.publish = publish;
     }
 
     public List<Page> getPageList() {

@@ -70,6 +70,13 @@ public interface UserService {
     User updateUserPortrait(User user);
 
     /**
+     * 为用户授予讲师角色
+     *
+     * @param user 用户对象
+     */
+    void authorizeUser(User user);
+
+    /**
      * 根据用户ID查询用户对象
      *
      * @param id 用户ID

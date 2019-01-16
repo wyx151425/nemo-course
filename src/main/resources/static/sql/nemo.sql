@@ -46,6 +46,7 @@ CREATE TABLE `book` (
   `cover` varchar(255),
   `page` int(3),
   `favor` int(11),
+  `publish` boolean,
   `author_id` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8;

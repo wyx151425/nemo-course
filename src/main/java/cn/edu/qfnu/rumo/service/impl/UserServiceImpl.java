@@ -136,6 +136,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void authorizeUser(User user) {
+        user.setRole(Constant.Roles.LECTURER);
+        user.setStatus(Constant.UserStatus.AUTHOR);
+        userRepository.update(user);
+    }
+
+
+    @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public User findUserContainsBookList(Integer id) {
         User user = userRepository.findUserById(id);

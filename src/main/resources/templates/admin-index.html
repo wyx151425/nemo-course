@@ -23,7 +23,7 @@
                     <a href="../user/blog" class="account-action"><span class="icon icon-user"></span>个人主页</a>
                     <a href="../user/settings" class="account-action"><span class="icon icon-cog"></span>账号设置</a>
                     <a href="../admin/index" class="account-action cog"
-                       v-if="user.permissions.APPROVE_APPLICATION"><span class="icon icon-edit"></span>系统管理</a>
+                       v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
                     <span class="account-action logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
@@ -79,7 +79,9 @@
             <img class="candidate-avatar" :src="candidate.avatar" alt=""/>
             <p class="candidate-name">
                 <span>{{candidate.name}}</span>
-                <span class="icon icon-ok-sign"></span></p>
+                <span class="icon icon-ok-sign" v-if="'USER' == user.role && user.permissions.AUTHORIZATION"
+                      @click="authorizeModalVisible"></span>
+            </p>
             <p class="candidate-item"><span class="candidate-title">注册时间：</span>{{candidate.createAt}}</p>
             <p class="candidate-item"><span class="candidate-title">性别：</span>{{candidate.gender}}</p>
             <p class="candidate-item"><span class="candidate-title">手机号：</span>{{candidate.mobilePhoneNumber}}</p>
@@ -92,6 +94,23 @@
 <footer class="footer">
     <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
 </footer>
+<div id="authorizeModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">授予角色</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content">
+            <p class="delete-prompt">您确定要将讲师角色授予{{user.name}}吗？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" type="button" @click="authorize" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
+        </div>
+    </div>
+</div>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>
@@ -103,20 +122,30 @@
     const main = new Vue({
         el: "#main",
         data: {
+            user: {},
             candidate: null,
             courseList: [],
             lecturerList: [],
             queryCode: ""
         },
         methods: {
+            setUser: function (user) {
+                this.user = user;
+            },
             setCandidate: function (candidate) {
                 this.candidate = candidate;
+            },
+            getCandidate: function () {
+                return this.candidate;
             },
             setCourseList: function (courseList) {
                 this.courseList = courseList;
             },
             setLecturerList: function (lecturerList) {
                 this.lecturerList = lecturerList;
+            },
+            authorizeModalVisible: function () {
+                authorizeModal.visible();
             },
             queryUser: function () {
                 if ("" === this.queryCode) {
@@ -148,9 +177,12 @@
                     }).catch(function () {
                     popoverSpace.append("服务器访问失败", false);
                 });
-            }
+            },
+
         },
         mounted: function () {
+            let user = JSON.parse(localStorage.getItem("user"));
+            this.setUser(user);
             axios.get(requestContext + "api/courses/rank?index=0")
                 .then(function (response) {
                     if (200 === response.data.statusCode) {
@@ -167,6 +199,51 @@
                 }).catch(function () {
                 popoverSpace.append("服务器访问失败", false);
             });
+        }
+    });
+
+    const authorizeModal = new Vue({
+        el: "#authorizeModal",
+        data: {
+            user: {},
+            isVisible: false,
+            isDisabled: false,
+            action: "确定"
+        },
+        methods: {
+            visible: function () {
+                this.user = main.getCandidate();
+                this.isVisible = true;
+            },
+            invisible: function () {
+                this.isVisible = false;
+            },
+            getUser: function () {
+                return this.user;
+            },
+            authorize: function () {
+                this.isDisabled = true;
+                this.action = "正在授权";
+                axios.put(requestContext + "api/users/authorize", this.user)
+                    .then(function (response) {
+                        let statusCode = response.data.statusCode;
+                        if (200 === statusCode) {
+                            authorizeModal.authorizeCallback("已将讲师角色授予" + authorizeModal.getUser().name, true);
+                        } else {
+                            authorizeModal.authorizeCallback("授权失败", false);
+                        }
+                    }).catch(function () {
+                    authorizeModal.authorizeCallback("服务器访问失败", false);
+                });
+            },
+            authorizeCallback: function (message, success) {
+                popoverSpace.append(message, success);
+                this.isDisabled = false;
+                this.action = "确定";
+                if (success) {
+                    this.isVisible = false;
+                }
+            }
         }
     });
 </script>

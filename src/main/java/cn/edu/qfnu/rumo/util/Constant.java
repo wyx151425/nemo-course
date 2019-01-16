@@ -62,13 +62,16 @@ public class Constant {
     public static class Roles {
         public static final String USER = "USER";
         public static final String LECTURER = "LECTURER";
-        public static final String ADMINISTRATOR = "ADMINISTRATOR";
+        public static final String MANAGER = "MANAGER";
     }
 
     public static class Permissions {
         public static final String COMMON = "COMMON";
         public static final String CREATE_COURSE = "CREATE_COURSE";
-        public static final String OBTAIN_FOLLOWER = "OBTAIN_FOLLOWER";
-        public static final String APPROVE_APPLICATION = "APPROVE_APPLICATION";
+        public static final String QUERY_COURSE = "QUERY_COURSE";
+        public static final String QUERY_FOLLOWER = "QUERY_FOLLOWER";
+        public static final String MANAGE_SYSTEM = "MANAGE_SYSTEM";
+        public static final String QUERY_USER = "QUERY_USER";
+        public static final String AUTHORIZATION = "AUTHORIZATION";
     }
 }

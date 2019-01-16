@@ -134,7 +134,7 @@
 
 .candidate-name .icon {
     font-size: 14px;
-    margin-right: 4px;
+    margin-left: 4px;
     cursor: pointer;
 }
 
@@ -217,6 +217,12 @@
     width: 146px;
     margin-top: 4px;
     font-size: 12px;
+}
+
+.delete-prompt {
+    font-size: 24px;
+    padding: 12px 0;
+    text-align: center;
 }
 
 .icon-ok-sign:before {

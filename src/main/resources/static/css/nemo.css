@@ -56,7 +56,7 @@ a, a:link, a:hover, a:active, a:visited, u {
     height: 64px;
     background-color: #fff;
     border-bottom: 1px solid #dedfe0;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
 }
 
 .header .container {

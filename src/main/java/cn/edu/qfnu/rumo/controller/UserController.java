@@ -90,10 +90,16 @@ public class UserController extends RumoFacade {
     }
 
     @PutMapping(value = "users/portrait")
-    public Response<User> actionUpdateUserPortarit(@RequestBody User requestUser) {
+    public Response<User> actionUpdateUserPortrait(@RequestBody User requestUser) {
         requestUser.setId(getCurrentUser().getId());
         User user = userService.updateUserPortrait(requestUser);
         addCurrentUser(user);
+        return new Response<>();
+    }
+
+    @PutMapping(value = "users/authorize")
+    public Response<User> actionUserAuthorization(@RequestBody User requestUser) {
+        userService.authorizeUser(requestUser);
         return new Response<>();
     }
 
