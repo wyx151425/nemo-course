@@ -147,7 +147,7 @@ const deleteModal = new Vue({
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     if (200 === statusCode) {
-                        window.location.href = requestContext + "user/book?id=" + main.getBookId();
+                        window.location.href = requestContext + "user/course?id=" + main.getBookId();
                     } else {
                         deleteModal.deleteResult("删除失败", false);
                     }

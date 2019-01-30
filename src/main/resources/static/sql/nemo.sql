@@ -42,7 +42,6 @@ CREATE TABLE `book` (
   `style` varchar(255),
   `type` varchar(255),
   `description` varchar(255),
-  `source` varchar(255),
   `cover` varchar(255),
   `page` int(3),
   `favor` int(11),

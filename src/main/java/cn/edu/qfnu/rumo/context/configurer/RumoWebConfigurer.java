@@ -42,14 +42,14 @@ public class RumoWebConfigurer implements WebMvcConfigurer {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/register").setViewName("register");
-        registry.addViewController("/user/blog").setViewName("user-blog");
-        registry.addViewController("/user/book").setViewName("user-book");
-        registry.addViewController("/user/page").setViewName("user-page");
+        registry.addViewController("/user/index").setViewName("user-blog");
+        registry.addViewController("/user/course").setViewName("user-book");
+        registry.addViewController("/user/lesson").setViewName("user-page");
         registry.addViewController("/user/settings").setViewName("user-settings");
-        registry.addViewController("/author/list").setViewName("author-list");
-        registry.addViewController("/author/blog").setViewName("author-blog");
-        registry.addViewController("/author/book").setViewName("author-book");
-        registry.addViewController("/book/list").setViewName("book-list");
+        registry.addViewController("/lecturer/list").setViewName("author-list");
+        registry.addViewController("/lecturer/index").setViewName("author-blog");
+        registry.addViewController("/lecturer/course").setViewName("author-book");
+        registry.addViewController("/course/list").setViewName("book-list");
         registry.addViewController("/admin/index").setViewName("admin-index");
     }
 }
