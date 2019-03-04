@@ -49,6 +49,9 @@ public class UserServiceImpl implements UserService {
             } else {
                 if (targetUser.getPassword().equals(user.getPassword())) {
                     List<Permission> permissionList = permissionRepository.findAllByRole(targetUser.getRole());
+                    Map<String, Boolean> roles = new HashMap<>();
+                    roles.put(targetUser.getRole(), true);
+                    targetUser.setRoles(roles);
                     Map<String, Boolean> permissions = new HashMap<>();
                     for (Permission permission : permissionList) {
                         permissions.put(permission.getCode(), true);

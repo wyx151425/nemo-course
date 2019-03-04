@@ -1,4 +1,4 @@
-package cn.edu.qfnu.rumo.context.configurer;
+package cn.edu.qfnu.rumo.context.configuration;
 
 import cn.edu.qfnu.rumo.context.interceptor.RumoInterceptor;
 import org.springframework.format.FormatterRegistry;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * updateAt: 2018/08/03
  */
 @Component
-public class RumoWebConfigurer implements WebMvcConfigurer {
+public class RumoWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
